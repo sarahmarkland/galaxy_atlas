@@ -17,7 +17,8 @@ create_table_query = '''
 CREATE TABLE "Solar_Systems" (
   "system_id" int PRIMARY KEY,
   "name" varchar,
-  "planets" varchar
+  "planets" varchar,
+  "image" varchar
 );
 
 CREATE TABLE "Planets" (
@@ -30,7 +31,8 @@ CREATE TABLE "Planets" (
   "moons" integer,
   "distance_from_star" integer,
   "flora" varchar,
-  "fauna" varchar
+  "fauna" varchar,
+  "image" varchar
 );
 
 CREATE TABLE "Flora" (
@@ -39,7 +41,8 @@ CREATE TABLE "Flora" (
   "description" varchar,
   "planet" varchar,
   "environment" varchar,
-  "life_span" varchar
+  "life_span" varchar,
+  "image" varchar
 );
 
 CREATE TABLE "Fauna" (
@@ -47,10 +50,12 @@ CREATE TABLE "Fauna" (
   "name" varchar,
   "description" varchar,
   "planet" varchar,
+  "environment" varchar,
   "diet" varchar,
   "behavior" varchar,
   "predators" varchar,
-  "lifespan" varchar
+  "lifespan" varchar,
+  "image" varchar
 );
 
 ALTER TABLE "Planets" ADD FOREIGN KEY ("planet_id") REFERENCES "Solar_Systems" ("planets");
