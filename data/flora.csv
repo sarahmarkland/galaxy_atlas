@@ -1,0 +1,10 @@
+flora_id,name,description,planet,environment,lifespan,image
+1,f1_name,"description",b3,"environment",lifespan,img_fauna_1.png
+2,f2_name,"description",b3,"environment",lifespan,img_fauna_2.png
+3,f3_name,"description",b3,"environment",lifespan,img_fauna_3.png
+4,f4_name,"description",s5,"environment",lifespan,img_fauna_4.png
+5,f5_name,"description",s5,"environment",lifespan,img_fauna_5.png
+6,f6_name,"description",s5,"environment",lifespan,img_fauna_6.png
+7,f7_name,"description",w4,"environment",lifespan,img_fauna_7.png
+8,f8_name,"description",w4,"environment",lifespan,img_fauna_8.png
+9,f9_name,"description",w4,"environment",lifespan,img_fauna_9.png
