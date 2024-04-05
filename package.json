@@ -1,0 +1,15 @@
+{
+  "name": "galaxy_atlas",
+  "version": "1.0.0",
+  "description": "An API providing comprehensive data and visualization tools for exploring the vast expanse of galaxies in the universe.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  }
+}
