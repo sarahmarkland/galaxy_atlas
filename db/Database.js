@@ -1,5 +1,5 @@
 import dbConn from "./dbConn.js";
-import * as MODELS from '../models/index.js';
+import * as MODELS from './models/index.js';
 
 
 class Database {

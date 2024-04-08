@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import dbConn from "../db/dbConn.js";
+import dbConn from "../dbConn.js";
 
 class Planets extends Model {}
 
