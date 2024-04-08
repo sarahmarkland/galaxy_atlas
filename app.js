@@ -1,7 +1,6 @@
 import Express from 'express';
 import { createLogger, format, transports } from 'winston';
 import StatusRoutes from './routes/StatusRoutes.js';
-import db from './db/index.js';
 
 const app = Express();
 const PORT = 3000;
