@@ -1,12 +1,10 @@
 import Express from 'express';
-// import dbConn from './db_conn.js';
-// import SolarSystems from './models/SolarSystems.js';
 import { createLogger, format, transports } from 'winston';
+import StatusRoutes from './routes/StatusRoutes.js';
+import db from './db/index.js';
 
 const app = Express();
 const PORT = 3000;
-
-// await dbConn.sync();
 
 // Logger
 const logger = createLogger({
@@ -29,13 +27,14 @@ app.get('/', (req, res) => {
   res.send('poob\n');
 });
 
-// console.log(SolarSystems);
+app.get('/status', StatusRoutes.getServerStatus);
+app.get('/models', StatusRoutes.getModels);
 
 app.listen(PORT, (error) =>{ 
   if(!error)
-    logger.info("Server is Successfully Running, and App is listening on port "+ PORT) 
+    logger.info("Server is Successfully Running, and App is listening on port "+ PORT);
   else
-    logger.error("Error occurred, server can't start", error); 
+    logger.error("Error occurred, server can't start", error);
   }
 );
 

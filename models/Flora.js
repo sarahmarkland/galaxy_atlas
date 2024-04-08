@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import dbConn from "../db_conn.js";
+import dbConn from "../db/dbConn.js";
 
 class Flora extends Model {}
 
