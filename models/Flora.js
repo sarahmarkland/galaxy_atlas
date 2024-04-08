@@ -1,17 +1,20 @@
 import { Model, DataTypes } from "sequelize";
 import dbConn from "../db_conn.js";
 
-class SolarSystems extends Model {}
+class Flora extends Model {}
 
-SolarSystems.init({
-  'system_id': {
+Flora.init({
+  'flora_id': {
     type: DataTypes.INTEGER,
     primaryKey: true,
   },
   'name': DataTypes.STRING,
+  'description': DataTypes.STRING,
+  'environment': DataTypes.STRING,
+  'lifespan': DataTypes.STRING,
   'image': DataTypes.STRING
 }, {
   sequelize: dbConn
 });
 
-export default SolarSystems;
+export default Flora;
