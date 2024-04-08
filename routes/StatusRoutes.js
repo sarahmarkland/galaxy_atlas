@@ -3,7 +3,7 @@ import db from "../db/index.js";
 class StatusRoutes {
 
   static async getServerStatus(req, res) {
-    if (db.getStatus()) {
+    if (await db.getStatus()) {
       res.status(200).send({ 'status': 'ok' });
     } else {
       res.status(503).send({ 'status': 'database authentication failed!' });
