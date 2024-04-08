@@ -1,19 +1,3 @@
-import psycopg2
-
-# Establish a connection to your PostgreSQL database
-conn = psycopg2.connect(
-    dbname="mydb",
-    user="postgres",
-    password="password",
-    host="127.0.0.1",  # localhost or 127.0.0.1
-    port="5432"
-)
-
-# Create a cursor object using the connection
-cur = conn.cursor()
-
-# Define the CREATE TABLE query
-create_table_query = '''
 CREATE TABLE "SolarSystems" (
   "system_id" int PRIMARY KEY,
   "name" varchar,
@@ -84,14 +68,3 @@ ALTER TABLE "Flora" ADD FOREIGN KEY ("flora_id") REFERENCES "Planets_Flora" ("fl
 ALTER TABLE "Planets" ADD FOREIGN KEY ("planet_id") REFERENCES "Planets_Fauna" ("planet_id");
 
 ALTER TABLE "Fauna" ADD FOREIGN KEY ("fauna_id") REFERENCES "Planets_Fauna" ("fauna_id");
-'''
-
-# Execute the CREATE TABLE query
-cur.execute(create_table_query)
-
-# Commit the transaction
-conn.commit()
-
-# Close the cursor and the connection
-cur.close()
-conn.close()
