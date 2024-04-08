@@ -1,5 +1,6 @@
 import dbConn from "./dbConn.js";
 import * as MODELS from './models/index.js';
+// ^^^ Importing all models here makes sure dbConn can see and sync our models
 
 
 class Database {
@@ -22,7 +23,7 @@ class Database {
   }
 
   getModels() {
-    return this.dbConn.models;
+    return Object.keys(this.dbConn.models);
   }
 
 }
