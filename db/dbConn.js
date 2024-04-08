@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 
-const DB_DEBUG = (
-  process.env.GALAXY_DEBUG === 'true'
-  || process.env.GALAXY_DEBUG === 'True'
+const DB_DEV = (
+  process.env.GALAXY_DEV === 'true'
+  || process.env.GALAXY_DEV === 'True'
 );
 const DB_HOST = process.env.GALAXY_DB_HOST || 'localhost';
 const DB_PORT = process.env.GALAXY_DB_PORT || 3306;
@@ -11,12 +11,12 @@ const DB_PASS = process.env.GALAXY_DB_PASS || null;
 
 let dbOptions;
 
-if (DB_DEBUG) {
+if (DB_DEV) {
   dbOptions = {
     dialect: 'sqlite',
     storage: 'galaxy_db.sqlite3'
   }
-  console.log('Server running in DEBUG mode');
+  console.log('Server running in DEV mode');
 } else {
   dbOptions = {
     dialect: 'postgres',

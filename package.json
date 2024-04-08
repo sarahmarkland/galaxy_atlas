@@ -4,6 +4,7 @@
   "description": "An API providing comprehensive data and visualization tools for exploring the vast expanse of galaxies in the universe.",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon --exec GALAXY_DEV=true node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,5 +16,8 @@
     "sqlite3": "^5.1.7",
     "winston": "^3.13.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
