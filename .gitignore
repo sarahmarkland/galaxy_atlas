@@ -162,5 +162,5 @@ cython_debug/
 #.idea/
 
 # Custom
-logs/
+logs/*.log
 galaxy_db.sqlite3
