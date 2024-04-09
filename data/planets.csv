@@ -1,25 +1,25 @@
-planet id,name,description,atmosphere,avgerage temp,mass,moons,distance from star,flora,fauna,image
-1,b1,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_1.png
-2,b2,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_2.png
-3,b3,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_3.png
-4,b4,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_4.png
-5,b5,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_5.png
-6,b6,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_6.png
-7,b7,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_7.png
-8,b8,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_8.png
-9,b9,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_9.png
-10,s10,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_10.png
-11,s11,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_11.png
-12,s12,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_12.png
-13,s13,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_13.png
-14,s14,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_14.png
-15,s15,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_15.png
-16,s16,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_16.png
-17,w17,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_17.png
-18,w18,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_18.png
-19,w19,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_19.png
-20,w20,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_20.png
-21,w21,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_21.png
-22,w22,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_22.png
-23,w23,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_23.png
-24,w24,"description",atmosphere,70 degree f,100g,0,999 miles,inhospitable,inhospitable,img_planet_24.png
+planet id,name,description,atmosphere,avgerage temp,mass,moons,distance from star,image
+1,b1,"description",atmosphere,70.5,100,0,999.5,img_planet_1.png
+2,b2,"description",atmosphere,70.5,100,0,999.5,img_planet_2.png
+3,b3,"description",atmosphere,70.5,100,0,999.5,img_planet_3.png
+4,b4,"description",atmosphere,70.5,100,0,999.5,img_planet_4.png
+5,b5,"description",atmosphere,70.5,100,0,999.5,img_planet_5.png
+6,b6,"description",atmosphere,70.5,100,0,999.5,img_planet_6.png
+7,b7,"description",atmosphere,70.5,100,0,999.5,img_planet_7.png
+8,b8,"description",atmosphere,70.5,100,0,999.5,img_planet_8.png
+9,b9,"description",atmosphere,70.5,100,0,999.5,img_planet_9.png
+10,s10,"description",atmosphere,70.5,100,0,999.5,img_planet_10.png
+11,s11,"description",atmosphere,70.5,100,0,999.5,img_planet_11.png
+12,s12,"description",atmosphere,70.5,100,0,999.5,img_planet_12.png
+13,s13,"description",atmosphere,70.5,100,0,999.5,img_planet_13.png
+14,s14,"description",atmosphere,70.5,100,0,999.5,img_planet_14.png
+15,s15,"description",atmosphere,70.5,100,0,999.5,img_planet_15.png
+16,s16,"description",atmosphere,70.5,100,0,999.5,img_planet_16.png
+17,w17,"description",atmosphere,70.5,100,0,999.5,img_planet_17.png
+18,w18,"description",atmosphere,70.5,100,0,999.5,img_planet_18.png
+19,w19,"description",atmosphere,70.5,100,0,999.5,img_planet_19.png
+20,w20,"description",atmosphere,70.5,100,0,999.5,img_planet_20.png
+21,w21,"description",atmosphere,70.5,100,0,999.5,img_planet_21.png
+22,w22,"description",atmosphere,70.5,100,0,999.5,img_planet_22.png
+23,w23,"description",atmosphere,70.5,100,0,999.5,img_planet_23.png
+24,w24,"description",atmosphere,70.5,100,0,999.5,img_planet_24.png

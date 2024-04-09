@@ -1,4 +1,4 @@
-system_id,name,planets,image
-1,ben_system,"1,2,3,4,5,6,7,8,9",img_solar_1.png
-2,sarah_system,"10,11,12,13,14,15,16",img_solar_2.png
-3,willow_system,"17,18,19,20,21,22,23,24",img_solar_3.png
+system_id,name,image
+1,ben_system,img_solar_1.png
+2,sarah_system,img_solar_2.png
+3,willow_system,img_solar_3.png
