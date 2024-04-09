@@ -4,7 +4,21 @@ import * as MODELS from './models/index.js';
 
 let dbInstance;
 
+/**
+ * Manages the database connection
+ * @date 4/9/2024 - 9:59:39 AM
+ *
+ * @class Database
+ * @typedef {Database}
+ */
 class Database {
+
+  /**
+   * Creates an instance of Database.
+   * @date 4/9/2024 - 9:59:34 AM
+   *
+   * @constructor
+   */
   constructor() {
     this.dbConn = dbConn;
     // Singleton pattern to prevent multiple Database instances existing at the same time
@@ -14,6 +28,13 @@ class Database {
     dbInstance = this;
   }
 
+  /**
+   * Gets the connection status of the Database
+   * @date 4/9/2024 - 9:55:09 AM
+   *
+   * @async
+   * @returns {boolean} - If true then connected, if false then not connected
+   */
   async getStatus() {
     try {
       await this.dbConn.authenticate();
@@ -23,11 +44,23 @@ class Database {
     }
   }
 
+  /**
+   * Syncs the database
+   * @date 4/9/2024 - 9:56:57 AM
+   *
+   * @async
+   */
   async sync() {
     console.log('db synced');
     await this.dbConn.sync();
   }
 
+  /**
+   * Get array of model names that the DB is currently aware of
+   * @date 4/9/2024 - 9:58:28 AM
+   *
+   * @returns {Array}
+   */
   getModels() {
     return Object.keys(this.dbConn.models);
   }

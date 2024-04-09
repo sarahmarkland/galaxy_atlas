@@ -1,6 +1,9 @@
 import Express from 'express';
 import { createLogger, format, transports } from 'winston';
 import StatusRoutes from './routes/StatusRoutes.js';
+import swaggerUI from 'swagger-ui-express';
+import apiDoc from './apiDoc.js';
+
 
 const app = Express();
 const PORT = 3000;
@@ -21,11 +24,10 @@ const logger = createLogger({
 
 // Routes -----------------------------------------------------------------------------------------------------------------------
 
-// Base HTML
-app.get('/', (req, res) => {
-  res.send('poob\n');
-});
+// Docs
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
+// Status
 app.get('/status', StatusRoutes.getServerStatus);
 app.get('/models', StatusRoutes.getModels);
 
