@@ -1,9 +1,8 @@
 import { Sequelize } from "sequelize";
+import logger from "../logger.js";
+import { isInDevMode } from "../utils.js";
 
-const DB_DEV = (
-  process.env.GALAXY_DEV === 'true'
-  || process.env.GALAXY_DEV === 'True'
-);
+const DB_DEV = isInDevMode();
 const DB_HOST = process.env.GALAXY_DB_HOST || 'localhost';
 const DB_PORT = process.env.GALAXY_DB_PORT || 3306;
 const DB_USER = process.env.GALAXY_DB_USER || 'space_user';
@@ -14,9 +13,10 @@ let dbOptions;
 if (DB_DEV) {
   dbOptions = {
     dialect: 'sqlite',
-    storage: 'galaxy_db.sqlite3'
+    storage: 'galaxy_db.sqlite3',
+    logging: (msg) => logger.debug(msg)
   }
-  console.log('Server running in DEV mode');
+  logger.info('Server running in DEV mode');
 } else {
   dbOptions = {
     dialect: 'postgres',
@@ -25,7 +25,7 @@ if (DB_DEV) {
     username: DB_USER,
     password: DB_PASS
   }
-  console.log('ACHTUNG!!! Server is running in PRODUCTION mode');
+  logger.info('ACHTUNG!!! Server is running in PRODUCTION mode');
 }
 
 const dbConn = new Sequelize(dbOptions);

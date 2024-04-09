@@ -1,4 +1,5 @@
 import dbConn from "./dbConn.js";
+import logger from "../logger.js";
 import * as MODELS from './models/index.js';
 // ^^^ Importing all models here makes sure dbConn can see and sync our models
 
@@ -51,8 +52,8 @@ class Database {
    * @async
    */
   async sync() {
-    console.log('db synced');
     await this.dbConn.sync();
+    logger.debug('Database synced');
   }
 
   /**
