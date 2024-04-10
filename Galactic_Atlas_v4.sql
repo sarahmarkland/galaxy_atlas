@@ -1,7 +1,6 @@
 CREATE TABLE "SolarSystems" (
   "system_id" int PRIMARY KEY,
   "name" varchar,
-  "planets" integer,
   "image" varchar
 );
 
@@ -15,12 +14,10 @@ CREATE TABLE "Planets" (
   "name" varchar,
   "description" varchar,
   "atmosphere" varchar,
-  "average_temp" varchar,
+  "average_temp" float,
   "mass" integer,
   "moons" integer,
-  "distance_from_star" integer,
-  "flora" integer,
-  "fauna" integer,
+  "distance_from_star" float,
   "image" varchar
 );
 
@@ -33,9 +30,6 @@ CREATE TABLE "Flora" (
   "flora_id" integer PRIMARY KEY,
   "name" varchar,
   "description" varchar,
-  "planet" varchar,
-  "environment" varchar,
-  "life_span" varchar,
   "image" varchar
 );
 
@@ -48,12 +42,6 @@ CREATE TABLE "Fauna" (
   "fauna_id" integer PRIMARY KEY,
   "name" varchar,
   "description" varchar,
-  "planet" varchar,
-  "environment" varchar,
-  "diet" varchar,
-  "behavior" varchar,
-  "predators" varchar,
-  "lifespan" varchar,
   "image" varchar
 );
 
