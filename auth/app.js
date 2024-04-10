@@ -1,7 +1,8 @@
 import Express from "express";
 import * as StatusRoutes from './routes/StatusRoutes.js';
 import authLogger from "./authLogger.js";
-import * as AuthRoutes from "./routes/AuthRoutes.js"
+import * as AuthRoutes from "./routes/AuthRoutes.js";
+import { isAuthInDevMode } from "./authUtils.js";
 
 
 const app = Express();

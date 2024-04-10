@@ -1,7 +1,7 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
-import { ifErrorCallNext, isAuthInDevMode } from "../authUtils.js";
+import { ifErrorCallNext } from "../authUtils.js";
 
 
 /**
