@@ -8,3 +8,11 @@ export function isAuthInDevMode() {
   const AUTH_DB_DEV = process.env.GALAXY_AUTH_DEV || '';
   return AUTH_DB_DEV.toLowerCase() === 'true';
 }
+
+export async function ifErrorCallNext(next, callback) {
+  try {
+    await callback();
+  } catch (error) {
+    next(error);
+  }
+}

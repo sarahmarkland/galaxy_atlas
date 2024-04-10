@@ -1,7 +1,7 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
-import { isAuthInDevMode } from "../authUtils.js";
+import { ifErrorCallNext, isAuthInDevMode } from "../authUtils.js";
 
 
 /**
@@ -15,33 +15,33 @@ import { isAuthInDevMode } from "../authUtils.js";
  * @param {*} next
  * @returns {*}
  * 
-@openapi
-paths:
-  /register:
-    post:
-      requestBody:
-        description: Registers a new user
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-
-      responses:
-        "200":
-          description: User successfully registered
-        "400":
-          description: sequelize cannot work with provided object
-        "500":
-          description: any other serverside error
+ * @openapi
+ * paths:
+ *   /register:
+ *     post:
+ *       requestBody:
+ *         description: Registers a new user
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 username:
+ *                   type: string
+ *                 password:
+ *                   type: string
+ * 
+ *       responses:
+ *         "200":
+ *           description: User successfully registered
+ *         "400":
+ *           description: sequelize cannot work with provided object
+ *         "500":
+ *           description: any other serverside error
  */
 export async function registerUser(req, res, next) {
-  try {
+  ifErrorCallNext(next, async () => {
     // Verify data is correct
     const reqFields = ['username', 'password'];
     const newUserData = req.body;
@@ -49,13 +49,11 @@ export async function registerUser(req, res, next) {
       if (!Object.keys(newUserData).includes(field)) {
         throw new Error(
           "request must contain fields 'username' and 'password'",
-          {
-            'cause': 'json validation'
-          }
+          { 'cause': 'json validation' }
         );
       }
     }
-
+  
     // bcrypt and send to db
     const newUserPass = await bcrypt.hash(newUserData.password, 10);
     const newUser = await User.create({
@@ -67,7 +65,5 @@ export async function registerUser(req, res, next) {
       'message': 'User created successfully!',
       'username': newUserData.username
     });
-  } catch (error) {
-    next(error);
-  }
+  });
 }
