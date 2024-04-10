@@ -1,14 +1,21 @@
 import Express from "express";
 import * as StatusRoutes from './routes/StatusRoutes.js';
 import authLogger from "./authLogger.js";
+import * as AuthRoutes from "./routes/AuthRoutes.js"
 
 
 const app = Express();
+app.use(Express.json());
 const PORT = process.env.GALAXY_AUTH_PORT || 3001;
 
+// Routes
 
+// Status
 app.use('/status', StatusRoutes.getServerStatus);
 app.use('/models', StatusRoutes.getModels);
+
+// Auth
+app.post('/register', AuthRoutes.registerUser);
 
 app.listen(PORT, (err) => {
   if(!err)

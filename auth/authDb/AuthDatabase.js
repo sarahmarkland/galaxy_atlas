@@ -48,7 +48,7 @@ class AuthDatabase {
    * @returns {Array}
    */
   getModels() {
-    return Object.keys(this.dbConn.models);
+    return Object.keys(this.authDbConn.models);
   }
 }
 
