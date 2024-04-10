@@ -2,7 +2,7 @@
 
 Welcome to the Atlas of Galaxies API! This API provides comprehensive data and visualization tools for exploring galaxies in the universe.
 
-![UML diagram](Galactic_Atlas_v4.png)
+![UML diagram](Galactic_Atlas_v6.png)
 
 ## Features
 

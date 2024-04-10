@@ -1,19 +1,3 @@
-import psycopg2
-
-# Establish a connection to your PostgreSQL database
-conn = psycopg2.connect(
-    dbname="galaxy_atlas",
-    user="postgres",
-    password="password",
-    host="127.0.0.1",  # localhost or 127.0.0.1
-    port="5432"
-)
-
-# Create a cursor object using the connection
-cur = conn.cursor()
-
-# Define the CREATE TABLE query
-create_table_query = '''
 CREATE TABLE "solarsystems" (
   "system_id" integer PRIMARY KEY,
   "name" varchar,
@@ -72,14 +56,3 @@ ALTER TABLE "planets_flora" ADD FOREIGN KEY ("flora_id") REFERENCES "flora" ("fl
 ALTER TABLE "planets_fauna" ADD FOREIGN KEY ("planet_id") REFERENCES "planets" ("planet_id");
 
 ALTER TABLE "planets_fauna" ADD FOREIGN KEY ("fauna_id") REFERENCES "fauna" ("fauna_id");
-'''
-
-# Execute the CREATE TABLE query
-cur.execute(create_table_query)
-
-# Commit the transaction
-conn.commit()
-
-# Close the cursor and the connection
-cur.close()
-conn.close()

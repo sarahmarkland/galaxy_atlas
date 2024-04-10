@@ -2,7 +2,7 @@ import psycopg2
 
 # Establish a connection to your PostgreSQL database
 conn = psycopg2.connect(
-    dbname="mydb",
+    dbname="galaxy_atlas",
     user="postgres",
     password="password",
     host="127.0.0.1",  # localhost or 127.0.0.1
@@ -13,10 +13,13 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 # Delete the tables
-cur.execute("DROP TABLE Solar_Systems")
-cur.execute("DROP TABLE Planets")
-cur.execute("DROP TABLE Flora")
-cur.execute("DROP TABLE Fauna")
+cur.execute("DROP TABLE planets_fauna")
+cur.execute("DROP TABLE planets_flora")
+cur.execute("DROP TABLE solarsystems_planets")
+cur.execute("DROP TABLE flora")
+cur.execute("DROP TABLE fauna")
+cur.execute("DROP TABLE planets")
+cur.execute("DROP TABLE solarsystems")
 
 # Commit the transaction
 conn.commit()
