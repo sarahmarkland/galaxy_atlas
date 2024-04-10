@@ -1,6 +1,7 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
+import { isAuthInDevMode } from "../authUtils.js";
 
 
 /**
@@ -11,6 +12,7 @@ import bcrypt from 'bcrypt';
  * @async
  * @param {*} req
  * @param {*} res
+ * @param {*} next
  * @returns {*}
  * 
 @openapi
@@ -33,21 +35,39 @@ paths:
       responses:
         "200":
           description: User successfully registered
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+        "400":
+          description: sequelize cannot work with provided object
+        "500":
+          description: any other serverside error
  */
-export async function registerUser(req, res) {
-  const newUserData = req.body;
-  const newUserPass = await bcrypt.hash(newUserData.password, 10);
-  const newUser = await User.create({
-    'username': newUserData.username,
-    'password': newUserPass
-  });
-  authLogger.debug(newUser.toJSON());
-  res.status(200).send({ 'message': 'User created successfully!'});
+export async function registerUser(req, res, next) {
+  try {
+    // Verify data is correct
+    const reqFields = ['username', 'password'];
+    const newUserData = req.body;
+    for (const field of reqFields) {
+      if (!Object.keys(newUserData).includes(field)) {
+        throw new Error(
+          "request must contain fields 'username' and 'password'",
+          {
+            'cause': 'json validation'
+          }
+        );
+      }
+    }
+
+    // bcrypt and send to db
+    const newUserPass = await bcrypt.hash(newUserData.password, 10);
+    const newUser = await User.create({
+      'username': newUserData.username,
+      'password': newUserPass
+    });
+    authLogger.debug(newUser.toJSON());
+    res.status(200).send({
+      'message': 'User created successfully!',
+      'username': newUserData.username
+    });
+  } catch (error) {
+    next(error);
+  }
 }
