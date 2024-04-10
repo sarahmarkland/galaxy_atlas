@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { isAuthInDevMode } from "../authUtils.js";
-import logger from  '../../logger.js';
+import authLogger from  '../authLogger.js';
 
 const AUTH_DB_DEV = isAuthInDevMode();
 const AUTH_DB_HOST = process.env.GALAXY_AUTH_DB_HOST || 'localhost';
@@ -10,13 +10,13 @@ const AUTH_DB_PASS = process.env.GALAXY_AUTH_DB_PASS || null;
 
 let dbOptions;
 
-if (DB_DEV) {
+if (AUTH_DB_DEV) {
   dbOptions = {
     dialect: 'sqlite',
     storage: 'galaxy_auth_db.sqlite3',
-    logging: (msg) => logger.debug(msg)
+    logging: (msg) => authLogger.debug(msg)
   }
-  logger.info('Server running in DEV mode');
+  authLogger.info('Server running in DEV mode');
 } else {
   dbOptions = {
     dialect: 'postgres',
@@ -25,7 +25,7 @@ if (DB_DEV) {
     username: AUTH_DB_USER,
     password: AUTH_DB_PASS
   }
-  logger.info('ACHTUNG!!! Server is running in PRODUCTION mode');
+  authLogger.info('ACHTUNG!!! Server is running in PRODUCTION mode');
 }
 
 const authDbConn = new Sequelize(dbOptions);
