@@ -4,7 +4,8 @@
   "description": "An API providing comprehensive data and visualization tools for exploring the vast expanse of galaxies in the universe.",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --exec GALAXY_DEV=true node app.js",
+    "dev_api": "nodemon --exec GALAXY_DEV=true node app.js",
+    "dev_auth": "nodemon --exec GALAXY_AUTH_DEV=true node ./auth/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

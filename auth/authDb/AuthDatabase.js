@@ -1,4 +1,5 @@
 import authDbConn from "./authDbConn.js";
+import authLogger from '../authLogger.js';
 import Users from './models/Users.js';
 
 let authDbInstance;
@@ -37,7 +38,7 @@ class AuthDatabase {
    */
   async sync() {
     await this.authDbConn.sync();
-    logger.debug('Database synced');
+    authLogger.debug('Database synced');
   }
 
   /**

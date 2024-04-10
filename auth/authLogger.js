@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import { isAuthInDevMode } from './authUtils';
+import { isAuthInDevMode } from './authUtils.js';
 
 const AUTH_DB_DEV = isAuthInDevMode();
 
