@@ -9,6 +9,19 @@ export function isAuthInDevMode() {
   return AUTH_DB_DEV.toLowerCase() === 'true';
 }
 
+/**
+ * Calls next() and passes error if async function callback() errors
+ * This is to make error handling with async functions a bit nicer
+ * since express does not automatically catch error in async functions
+ * See: https://expressjs.com/en/guide/error-handling.html
+ * @date 4/10/2024 - 6:18:56 PM
+ *
+ * @export
+ * @async
+ * @param {*} next
+ * @param {*} callback
+ * @returns {*}
+ */
 export async function ifErrorCallNext(next, callback) {
   try {
     await callback();
