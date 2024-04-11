@@ -1,4 +1,4 @@
-planet id,system,system_id,name,description,atmosphere,average temp in celcius,mass x earth mass,# of moons,distance from star (millions km),image
+planet_id,name,system,system_id,description,atmosphere,temp,mass,moons,distance,image
 1,"Helios","Veridia System",1,"Helios is a rocky, barren world scorched by the intense radiation of its nearby star.","none",200,0.8,0,70,"1_planet_helios.png"
 2,"Aurelia","Veridia System",1,"Aurelia is a desert planet characterized by vast sandy dunes and rocky plateaus.","Carbon dioxide",45,0.9,1,80,"2_planet_aurelia.png"
 3,"Veridia Prime","Veridia System",1,"Veridia Prime is a lush, vibrant world teeming with diverse ecosystems and abundant life.","Nitrogen-oxygen",25,1.2,2,150,"3_planet_viridiaPrime.png"
