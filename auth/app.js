@@ -1,7 +1,7 @@
 import Express from "express";
 import authLogger from "./authLogger.js";
 import { isAuthInDevMode } from "./authUtils.js";
-import { InvalidJSONError } from "./errors.js";
+import { InvalidParamsError } from "./errors.js";
 import * as StatusRoutes from './routes/StatusRoutes.js';
 import * as AuthRoutes from "./routes/AuthRoutes.js";
 
@@ -23,7 +23,7 @@ app.post('/login', AuthRoutes.loginUser);
 
 // Error-handling
 app.use((err, req, res, next) => {
-  if (err instanceof InvalidJSONError) {
+  if (err instanceof InvalidParamsError) {
     res.status(400).send({
       'error': 'Object cannot be parsed', 'jsMessage': `${err.message}`
     });

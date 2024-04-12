@@ -2,7 +2,7 @@
 //   "request must contain fields 'username' and 'password'"
 // );
 
-export class InvalidJSONError extends Error {
+export class InvalidParamsError extends Error {
   constructor(message, options) {
     super(message, options);
   }

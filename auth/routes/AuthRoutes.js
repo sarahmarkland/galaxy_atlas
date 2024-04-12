@@ -4,23 +4,23 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import redisClient from "../redisClient.js";
 import { ifErrorCallNext } from "../authUtils.js";
-import { InvalidJSONError } from "../errors.js";
-
+import { InvalidParamsError } from "../errors.js";
 
 
 /**
- * Checks if reqBody includes fields username and password
- * and throws InvalidJSONError if invalid
+ * Gets the username and password from a base64 encoded string
+ * and ensures it is using basic authentication
  * @date 4/11/2024 - 7:18:41 PM
  *
  * @param {*} reqBody
  */
-function checkUserPassFields(reqBody) {
-  for (const field of ['username', 'password']) {
-    if (!Object.keys(reqBody).includes(field)) {
-      throw new InvalidJSONError('Missing username or password');
-    }
+function getUserPassFields(authHeader) {
+  const split_authHeader = authHeader.split(' ');
+  if (split_authHeader[0] !== 'Basic') {
+    throw new InvalidParamsError("Must use 'Basic' authentication");
   }
+  const b64 = split_authHeader[1];
+  return Buffer.from(b64, 'base64').toString().split(':');
 }
 
 
@@ -61,8 +61,7 @@ function checkUserPassFields(reqBody) {
  */
 async function bare_registerUser(req, res) {
   // Verify data is correct
-  checkUserPassFields(req.body);
-  const { username, password } = req.body;
+  const [ username, password ] = getUserPassFields(req.headers.authorization);
 
   // bcrypt and send to db
   const encryptedPass = await bcrypt.hash(password, 10);
@@ -112,8 +111,7 @@ async function bare_registerUser(req, res) {
  *           description: any other serverside error
  */
 async function bare_loginUser(req, res) {
-  checkUserPassFields(req.body);
-  const { username, password } = req.body;
+  const [ username, password ] = getUserPassFields(req.headers.authorization);
 
   const user = await User.findOne({ where: { username } });
   if (!user) {
@@ -136,9 +134,13 @@ async function bare_loginUser(req, res) {
     { expiresIn: '1h' }
   );
 
-  redisClient.set(token, user.id);
-
+  redisClient.set(token, user.id, { EX: 60*60 });
   return res.status(200).send({ token });
+}
+
+
+async function bare_logoutUser(req, res) {
+  void(0);
 }
 
 
