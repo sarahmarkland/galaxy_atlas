@@ -5,7 +5,15 @@ meta {
 }
 
 post {
-  url: http://localhost:3001
+  url: http://localhost:3001/login
   body: none
   auth: none
+}
+
+headers {
+  Authorization: Basic YnVuZ3Vsb2o6YmFqb29raWVsYW5kZXI=
+}
+
+body:json {
+  { "username": "funno", "password": "hoho" }
 }

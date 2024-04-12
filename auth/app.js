@@ -19,7 +19,8 @@ app.use('/models', StatusRoutes.getModels);
 // Auth
 app.post('/register', AuthRoutes.registerUser);
 app.post('/login', AuthRoutes.loginUser);
-// app.post('/logout', AuthRoutes.logoutUser);
+app.post('/logout', AuthRoutes.logoutUser);
+app.post('/authenticated', AuthRoutes.userAuthenticated);
 
 // Error-handling
 app.use((err, req, res, next) => {

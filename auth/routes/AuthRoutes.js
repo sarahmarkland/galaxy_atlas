@@ -37,20 +37,13 @@ function getUserPassFields(authHeader) {
  * @openapi
  * paths:
  *   /register:
+ *     description: authenticate user via auth header
  *     post:
- *       requestBody:
- *         description: Registers a new user
- *         required: true
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 username:
- *                   type: string
- *                 password:
- *                   type: string
- * 
+ *       paramterers:
+ *         - in: header
+ *           name: Authorization
+ *           schema:
+ *             type: string
  *       responses:
  *         "200":
  *           description: User successfully registered
@@ -62,9 +55,11 @@ function getUserPassFields(authHeader) {
 async function bare_registerUser(req, res) {
   // Verify data is correct
   const [ username, password ] = getUserPassFields(req.headers.authorization);
+  console.log(username, password);
 
   // bcrypt and send to db
   const encryptedPass = await bcrypt.hash(password, 10);
+  console.log(username, password, encryptedPass);
   const newUser = await User.create({
     'username': username,
     'password': encryptedPass
@@ -89,18 +84,12 @@ async function bare_registerUser(req, res) {
  * paths:
  *   /register:
  *     post:
- *       requestBody:
- *         description: Logs in the user
- *         required: true
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 username:
- *                   type: string
- *                 password:
- *                   type: string
+ *       summary: log in user and get session token
+ *       parameters:
+ *         - in: header
+ *           name: Authorization
+ *           schema:
+ *             type: string
  * 
  *       responses:
  *         "200":
@@ -121,7 +110,7 @@ async function bare_loginUser(req, res) {
     });
   }
 
-  if (!await bcrypt.compare(password, user.password)) {
+  if (!(await bcrypt.compare(password, user.password))) {
     return res.status(401).send({
       'error': 'Incorrect password',
       'invalid': 'password'
@@ -139,11 +128,58 @@ async function bare_loginUser(req, res) {
 }
 
 
+/**
+ * Log out
+ * @date 4/12/2024 - 10:20:34 AM
+ *
+ * @async
+ * @param {*} req
+ * @param {*} res
+ * @returns {unknown}
+ */
 async function bare_logoutUser(req, res) {
-  void(0);
+  const { token } = req.body;
+  const userId = await redisClient.get(token);
+
+  if (!userId) {
+    return res.status(404).send({
+      'error': 'no user session found'
+    });
+  }
+
+  const redisResponse = await redisClient.del(token);
+  return res.status(200).send({ 'message': 'User logged out', token });
 }
 
+
+/**
+ * Check if user is authenticated
+ * @date 4/12/2024 - 10:39:53 AM
+ *
+ * @async
+ * @param {*} req
+ * @param {*} res
+ * @returns {unknown}
+ */
+async function bare_userAuthenticated(req, res) {
+  const { token } = req.body;
+  const userId = await redisClient.get(token);
+
+  if (!userId) {
+    return res.status(404).send({
+      'error': 'no user session found'
+    });
+  }
+
+  const redisResponse = await redisClient.get(token);
+  return res.status(200).send({
+    'message': 'User is session authenticated',
+    token
+  });
+}
 
 // Wrap function to allow for async error handling in express
 export const registerUser = ifErrorCallNext(bare_registerUser);
 export const loginUser = ifErrorCallNext(bare_loginUser);
+export const logoutUser = ifErrorCallNext(bare_logoutUser);
+export const userAuthenticated = ifErrorCallNext(bare_userAuthenticated);
