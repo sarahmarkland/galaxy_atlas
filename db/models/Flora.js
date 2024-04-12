@@ -10,8 +10,6 @@ Flora.init({
   },
   'name': DataTypes.STRING,
   'description': DataTypes.STRING,
-  'environment': DataTypes.STRING,
-  'lifespan': DataTypes.STRING,
   'image': DataTypes.STRING
 }, {
   sequelize: dbConn

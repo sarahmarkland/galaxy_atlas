@@ -28,6 +28,7 @@ for index, row in systems.iterrows():
     )
 
 planets['planet_id'] = planets['planet_id'].astype(int)
+planets['system_id'] = planets['system_id'].astype(int)
 planets['temp'] = planets['temp'].astype(int)
 planets['mass'] = planets['mass'].astype(int)
 planets['moons'] = planets['moons'].astype(int)
@@ -38,17 +39,36 @@ for index, row in planets.iterrows():
         "INSERT INTO planets (planet_id, name, description, atmosphere, average_temp, mass, moons, distance_from_star, image) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
         (row['planet_id'], row['name'], row['description'], row['atmosphere'], row['temp'], row['mass'], row['moons'], row['distance'], row['image'])
     )
+    cur.execute(
+        "INSERT INTO solarsystems_planets (system_id, planet_id) VALUES (%s, %s)",
+        (row['system_id'], row['planet_id'])
+    )
 
 flora['flora_id'] = flora['flora_id'].astype(int)
+flora['planet_id'] = flora['planet_id'].astype(int)
 
 for index, row in flora.iterrows():
     cur.execute(
         "INSERT INTO flora (flora_id, name, description, image) VALUES (%s, %s, %s, %s)",
         (row['flora_id'], row['name'], row['description'], row['image'])
     )
+    cur.execute(
+        "INSERT INTO planets_flora (planet_id, flora_id) VALUES (%s, %s)",
+        (row['planet_id'], row['flora_id'])
+    )
 
 
-# fauna['fauna_id'] = fauna['fauna_id'].astype(int)
+fauna['fauna_id'] = fauna['fauna_id'].astype(int)
+fauna['planet_id'] = fauna['planet_id'].astype(int)
+for index, row in fauna.iterrows():
+    cur.execute(
+        "INSERT INTO fauna (fauna_id, name, description, image) VALUES (%s, %s, %s, %s)",
+        (row['fauna_id'], row['name'], row['description'], row['image'])
+    )
+    cur.execute(
+        "INSERT INTO planets_fauna (planet_id, fauna_id) VALUES (%s, %s)",
+        (row['planet_id'], row['fauna_id'])
+    )
 
 # Commit the transaction
 conn.commit()
