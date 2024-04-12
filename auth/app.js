@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
     if (isAuthInDevMode()) {
       res.status(500).send({ 'error': err.message, 'jsMessage': `${err}` });
     } else {
-      res.status(500).send ({ 'error': 'serverside error'});
+      res.status(500).send ({ 'error': 'serverside error' });
     }
   }
 });

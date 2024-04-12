@@ -5,7 +5,11 @@ meta {
 }
 
 post {
-  url: localhost:3001/register
-  body: none
+  url: http://localhost:3001/register
+  body: json
   auth: none
+}
+
+body:json {
+  { "username": "bunguloj" }
 }

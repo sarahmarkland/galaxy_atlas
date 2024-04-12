@@ -3,6 +3,22 @@ import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
 import { ifErrorCallNext } from "../authUtils.js";
 
+/**
+ * Checks if reqBody includes fields username and password
+ * @date 4/11/2024 - 7:18:41 PM
+ *
+ * @param {*} reqBody
+ */
+function checkUserPassFields(reqBody) {
+  for (const field of ['username', 'password']) {
+    if (!Object.keys(reqBody).includes(field)) {
+      throw new Error(
+        "request must contain fields 'username' and 'password'",
+        { 'cause': 'json validation' }
+      );
+    }
+  }
+}
 
 /**
  * Registers a new user
@@ -12,7 +28,6 @@ import { ifErrorCallNext } from "../authUtils.js";
  * @async
  * @param {*} req
  * @param {*} res
- * @param {*} next
  * @returns {*}
  * 
  * @openapi
@@ -42,27 +57,24 @@ import { ifErrorCallNext } from "../authUtils.js";
  */
 async function bare_registerUser(req, res) {
   // Verify data is correct
-  const reqFields = ['username', 'password'];
-  const newUserData = req.body;
-  for (const field of reqFields) {
-    if (!Object.keys(newUserData).includes(field)) {
-      throw new Error(
-        "request must contain fields 'username' and 'password'",
-        { 'cause': 'json validation' }
-      );
-    }
-  }
+  checkUserPassFields(req.body);
+  const { username, password } = req.body;
+
   // bcrypt and send to db
-  const newUserPass = await bcrypt.hash(newUserData.password, 10);
+  const encryptedPass = await bcrypt.hash(password, 10);
   const newUser = await User.create({
-    'username': newUserData.username,
-    'password': newUserPass
+    'username': username,
+    'password': encryptedPass
   });
   authLogger.debug(newUser.toJSON());
   res.status(200).send({
     'message': 'User created successfully!',
-    'username': newUserData.username
+    'username': username
   });
+}
+
+async function bare_loginUser(req, res) {
+  
 }
 
 // Wrap function to allow for async error handling in express
