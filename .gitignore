@@ -164,3 +164,5 @@ cython_debug/
 # Custom
 logs/*.log
 galaxy_db.sqlite3
+galaxy_auth_db.sqlite3
+package-lock.json
