@@ -2,6 +2,10 @@
 
 Welcome to the Atlas of Galaxies API! This API provides comprehensive data and visualization tools for exploring galaxies in the universe.
 
+System Diagram
+![System diagram](./system_diagram.jpg)
+
+API DB
 ![UML diagram](Galactic_Atlas_v6.png)
 
 ## Features
@@ -10,6 +14,8 @@ Welcome to the Atlas of Galaxies API! This API provides comprehensive data and v
 - **Visualization Tools**: Utilize visualization tools to render galaxies in 2D and 3D space, allowing for interactive exploration.
 - **Search and Filter**: Easily search and filter galaxies based on different parameters such as type, distance, size, etc.
 - **Authentication**: Secure endpoints with authentication to ensure data integrity and access control.
+
+<!-- TODO: Update installation and usage instructions -->
 
 ## Installation
 
