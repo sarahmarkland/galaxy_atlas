@@ -10,11 +10,6 @@ Fauna.init({
   },
   'name': DataTypes.STRING,
   'description': DataTypes.STRING,
-  'environment': DataTypes.STRING,
-  'diet': DataTypes.STRING,
-  'behavior': DataTypes.STRING,
-  'predators': DataTypes.STRING,
-  'lifespan': DataTypes.STRING,
   'image': DataTypes.STRING
 }, {
   sequelize: dbConn
