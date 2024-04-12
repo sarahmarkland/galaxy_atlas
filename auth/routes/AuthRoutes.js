@@ -118,7 +118,7 @@ async function bare_loginUser(req, res) {
   }
 
   const token = jwt.sign(
-    { username: user.id },
+    { uid: user.id },
     'secure key',  // TODO: add environment variable for secure key
     { expiresIn: '1h' }
   );
@@ -139,6 +139,9 @@ async function bare_loginUser(req, res) {
  */
 async function bare_logoutUser(req, res) {
   const { token } = req.body;
+  if (!token) {
+    throw new InvalidParamsError("Field 'token' required");
+  }
   const userId = await redisClient.get(token);
 
   if (!userId) {
@@ -147,7 +150,7 @@ async function bare_logoutUser(req, res) {
     });
   }
 
-  const redisResponse = await redisClient.del(token);
+  await redisClient.del(token);
   return res.status(200).send({ 'message': 'User logged out', token });
 }
 
@@ -163,15 +166,18 @@ async function bare_logoutUser(req, res) {
  */
 async function bare_userAuthenticated(req, res) {
   const { token } = req.body;
+  if (!token) {
+    throw new InvalidParamsError("Field 'token' required");
+  }
   const userId = await redisClient.get(token);
+  const jwtVerify = jwt.verify(token, 'secure key');
 
-  if (!userId) {
-    return res.status(404).send({
-      'error': 'no user session found'
-    });
+  if (parseInt(userId) !== jwtVerify.uid) {
+    return res.status(401).send({
+      'error': 'User unauthorized'
+    })
   }
 
-  const redisResponse = await redisClient.get(token);
   return res.status(200).send({
     'message': 'User is session authenticated',
     token
