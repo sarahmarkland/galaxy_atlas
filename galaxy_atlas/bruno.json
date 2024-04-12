@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "galaxy_atlas",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

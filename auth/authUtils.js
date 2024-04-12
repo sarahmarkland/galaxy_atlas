@@ -22,10 +22,12 @@ export function isAuthInDevMode() {
  * @param {*} callback
  * @returns {*}
  */
-export async function ifErrorCallNext(next, callback) {
-  try {
-    await callback();
-  } catch (error) {
-    next(error);
+export function ifErrorCallNext(fn) {
+  return async function(req, res, next) {
+    try {
+      await fn(req, res, next);
+    } catch (error) {
+      next(error);
+    }
   }
 }

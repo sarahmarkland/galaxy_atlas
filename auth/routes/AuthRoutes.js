@@ -40,30 +40,31 @@ import { ifErrorCallNext } from "../authUtils.js";
  *         "500":
  *           description: any other serverside error
  */
-export async function registerUser(req, res, next) {
-  ifErrorCallNext(next, async () => {
-    // Verify data is correct
-    const reqFields = ['username', 'password'];
-    const newUserData = req.body;
-    for (const field of reqFields) {
-      if (!Object.keys(newUserData).includes(field)) {
-        throw new Error(
-          "request must contain fields 'username' and 'password'",
-          { 'cause': 'json validation' }
-        );
-      }
+async function bare_registerUser(req, res) {
+  // Verify data is correct
+  const reqFields = ['username', 'password'];
+  const newUserData = req.body;
+  for (const field of reqFields) {
+    if (!Object.keys(newUserData).includes(field)) {
+      throw new Error(
+        "request must contain fields 'username' and 'password'",
+        { 'cause': 'json validation' }
+      );
     }
-  
-    // bcrypt and send to db
-    const newUserPass = await bcrypt.hash(newUserData.password, 10);
-    const newUser = await User.create({
-      'username': newUserData.username,
-      'password': newUserPass
-    });
-    authLogger.debug(newUser.toJSON());
-    res.status(200).send({
-      'message': 'User created successfully!',
-      'username': newUserData.username
-    });
+  }
+  // bcrypt and send to db
+  const newUserPass = await bcrypt.hash(newUserData.password, 10);
+  const newUser = await User.create({
+    'username': newUserData.username,
+    'password': newUserPass
+  });
+  authLogger.debug(newUser.toJSON());
+  res.status(200).send({
+    'message': 'User created successfully!',
+    'username': newUserData.username
   });
 }
+
+// Wrap function to allow for async error handling in express
+const registerUser = ifErrorCallNext(bare_registerUser);
+export default registerUser;

@@ -1,7 +1,7 @@
 import Express from "express";
 import * as StatusRoutes from './routes/StatusRoutes.js';
 import authLogger from "./authLogger.js";
-import * as AuthRoutes from "./routes/AuthRoutes.js";
+import registerUser from "./routes/AuthRoutes.js";
 import { isAuthInDevMode } from "./authUtils.js";
 
 
@@ -16,7 +16,7 @@ app.use('/status', StatusRoutes.getServerStatus);
 app.use('/models', StatusRoutes.getModels);
 
 // Auth
-app.post('/register', AuthRoutes.registerUser);
+app.post('/register', registerUser);
 
 // Error-handling
 app.use((err, req, res, next) => {
