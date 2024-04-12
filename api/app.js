@@ -3,13 +3,16 @@ import StatusRoutes from './routes/StatusRoutes.js';
 import swaggerUI from 'swagger-ui-express';
 import apiDoc from './apiDoc.js';
 import logger from './logger.js';
-
+import fs from 'fs';
 
 const app = Express();
+app.use(Express.static('./frontend/'));
 const PORT = 3000;
 
 // Routes -----------------------------------------------------------------------------------------------------------------------
-
+app.get('/', (req, res) => {
+  res.sendFile(process.cwd() + '/frontend/index.html')
+});
 // Docs
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
