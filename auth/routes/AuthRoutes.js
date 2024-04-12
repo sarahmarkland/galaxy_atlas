@@ -67,14 +67,27 @@ async function bare_registerUser(req, res) {
     'password': encryptedPass
   });
   authLogger.debug(newUser.toJSON());
-  res.status(200).send({
+  return res.status(200).json({
     'message': 'User created successfully!',
     'username': username
   });
 }
 
 async function bare_loginUser(req, res) {
-  
+  checkUserPassFields(req.body);
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ where: { username } });
+  if (!user) {
+    return res.status(401).json({
+      'error': 'Incorrect username',
+      'invalid': 'username'
+    });
+  }
+
+  if (!await bcrypt.compare(password, user.password)) {
+    return res.status(401).json({ 'error': 'Incorrect password' });
+  }
 }
 
 // Wrap function to allow for async error handling in express
