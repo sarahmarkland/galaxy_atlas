@@ -10,7 +10,7 @@ export function isAuthInDevMode() {
 }
 
 /**
- * Calls next() and passes error if async function callback() errors
+ * Calls next() and passes error if async function fn() errors
  * This is to make error handling with async functions a bit nicer
  * since express does not automatically catch error in async functions
  * See: https://expressjs.com/en/guide/error-handling.html

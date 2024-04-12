@@ -1,10 +1,16 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import redisClient from "../redisClient.js";
 import { ifErrorCallNext } from "../authUtils.js";
+import { InvalidJSONError } from "../errors.js";
+
+
 
 /**
  * Checks if reqBody includes fields username and password
+ * and throws InvalidJSONError if invalid
  * @date 4/11/2024 - 7:18:41 PM
  *
  * @param {*} reqBody
@@ -12,13 +18,11 @@ import { ifErrorCallNext } from "../authUtils.js";
 function checkUserPassFields(reqBody) {
   for (const field of ['username', 'password']) {
     if (!Object.keys(reqBody).includes(field)) {
-      throw new Error(
-        "request must contain fields 'username' and 'password'",
-        { 'cause': 'json validation' }
-      );
+      throw new InvalidJSONError('Missing username or password');
     }
   }
 }
+
 
 /**
  * Registers a new user
@@ -29,7 +33,7 @@ function checkUserPassFields(reqBody) {
  * @param {*} req
  * @param {*} res
  * @returns {*}
- * 
+ *
  * @openapi
  * paths:
  *   /register:
@@ -67,29 +71,77 @@ async function bare_registerUser(req, res) {
     'password': encryptedPass
   });
   authLogger.debug(newUser.toJSON());
-  return res.status(200).json({
+  return res.status(200).send({
     'message': 'User created successfully!',
     'username': username
   });
 }
 
+
+/**
+ * Log in the user
+ * @date 4/11/2024 - 8:27:19 PM
+ *
+ * @async
+ * @param {*} req
+ * @param {*} res
+ * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /register:
+ *     post:
+ *       requestBody:
+ *         description: Logs in the user
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 username:
+ *                   type: string
+ *                 password:
+ *                   type: string
+ * 
+ *       responses:
+ *         "200":
+ *           description: User successfully registered
+ *         "401":
+ *           description: incorrect username or password
+ *         "500":
+ *           description: any other serverside error
+ */
 async function bare_loginUser(req, res) {
   checkUserPassFields(req.body);
   const { username, password } = req.body;
 
   const user = await User.findOne({ where: { username } });
   if (!user) {
-    return res.status(401).json({
+    return res.status(401).send({
       'error': 'Incorrect username',
       'invalid': 'username'
     });
   }
 
   if (!await bcrypt.compare(password, user.password)) {
-    return res.status(401).json({ 'error': 'Incorrect password' });
+    return res.status(401).send({
+      'error': 'Incorrect password',
+      'invalid': 'password'
+    });
   }
+
+  const token = jwt.sign(
+    { username: user.id },
+    'secure key',  // TODO: add environment variable for secure key
+    { expiresIn: '1h' }
+  );
+
+  redisClient.set(token, user.id);
+
+  return res.status(200).send({ token });
 }
 
+
 // Wrap function to allow for async error handling in express
-const registerUser = ifErrorCallNext(bare_registerUser);
-export default registerUser;
+export const registerUser = ifErrorCallNext(bare_registerUser);
+export const loginUser = ifErrorCallNext(bare_loginUser);

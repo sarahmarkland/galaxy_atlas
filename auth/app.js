@@ -1,8 +1,9 @@
 import Express from "express";
-import * as StatusRoutes from './routes/StatusRoutes.js';
 import authLogger from "./authLogger.js";
-import registerUser from "./routes/AuthRoutes.js";
 import { isAuthInDevMode } from "./authUtils.js";
+import { InvalidJSONError } from "./errors.js";
+import * as StatusRoutes from './routes/StatusRoutes.js';
+import * as AuthRoutes from "./routes/AuthRoutes.js";
 
 
 const app = Express();
@@ -16,12 +17,16 @@ app.use('/status', StatusRoutes.getServerStatus);
 app.use('/models', StatusRoutes.getModels);
 
 // Auth
-app.post('/register', registerUser);
+app.post('/register', AuthRoutes.registerUser);
+app.post('/login', AuthRoutes.loginUser);
+// app.post('/logout', AuthRoutes.logoutUser);
 
 // Error-handling
 app.use((err, req, res, next) => {
-  if (err.cause === 'json validation') {
-    res.status(400).send({ 'error': 'Object cannot be parsed', 'jsMessage': `${err}`});
+  if (err instanceof InvalidJSONError) {
+    res.status(400).send({
+      'error': 'Object cannot be parsed', 'jsMessage': `${err.message}`
+    });
   } else {
     authLogger.error(err);
     if (isAuthInDevMode()) {
