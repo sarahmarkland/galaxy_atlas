@@ -4,28 +4,24 @@
   "description": "An API providing comprehensive data and visualization tools for exploring the vast expanse of galaxies in the universe.",
   "main": "app.js",
   "scripts": {
-    "dev_api": "nodemon --exec GALAXY_DEV=true node app.js",
-    "dev_auth": "nodemon --exec GALAXY_AUTH_DEV=true node ./auth/app.js",
+    "dev": "nodemon --exec GALAXY_DEV=true node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
-    "redis": "^4.6.13",
     "sequelize": "^6.37.2",
     "sqlite3": "^5.1.7",
     "swagger-ui-express": "^5.0.0",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "swagger-jsdoc": "^6.2.8"
   },
   "type": "module",
   "devDependencies": {
     "jsdoc": "^4.0.2",
-    "nodemon": "^3.1.0",
-    "swagger-jsdoc": "^6.2.8"
+    "nodemon": "^3.1.0"
   }
 }

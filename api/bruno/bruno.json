@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "galaxy_atlas",
+  "name": "galaxy atlas api",
   "type": "collection",
   "ignore": [
     "node_modules",
@@ -8,6 +8,6 @@
   ],
   "presets": {
     "requestType": "http",
-    "requestUrl": "http://localhost:3001"
+    "requestUrl": "http://localhost:3000"
   }
 }
