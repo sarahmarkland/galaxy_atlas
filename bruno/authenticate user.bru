@@ -1,0 +1,17 @@
+meta {
+  name: authenticate user
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3001/authenticated
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTcxMjkzODA5NiwiZXhwIjoxNzEyOTQxNjk2fQ.WmeNc-ftkgDJLyxdu_dHNPiuhwj45_Z3t8k0ALfvrAw"
+  }
+}
