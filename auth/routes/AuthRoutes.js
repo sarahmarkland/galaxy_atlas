@@ -141,7 +141,7 @@ async function bare_logoutUser(req, res) {
   const userId = await redisClient.get(token);
 
   if (!userId) {
-    return res.status(404).send({
+    return res.status(401).send({
       'error': 'no user session'
     });
   }
