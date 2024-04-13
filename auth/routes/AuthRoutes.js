@@ -1,7 +1,7 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { randomBytes } from 'node:crypto';
 import redisClient from "../redisClient.js";
 import { ifErrorCallNext } from "../authUtils.js";
 import { InvalidParamsError } from "../errors.js";
@@ -117,12 +117,11 @@ async function bare_loginUser(req, res) {
     });
   }
 
-  const token = jwt.sign(
-    { uid: user.id },
-    'secure key',  // TODO: add environment variable for secure key
-    { expiresIn: '1h' }
-  );
+  const token = Buffer.from(
+    `${user.username}:${user.id}:${randomBytes(16).toString()}`
+    ).toString('base64');
 
+  res.cookie('X-Session-Token', token);
   redisClient.set(token, user.id, { EX: 60*60 });
   return res.status(200).send({ token });
 }
@@ -170,9 +169,10 @@ async function bare_userAuthenticated(req, res) {
     throw new InvalidParamsError("Field 'token' required");
   }
   const userId = await redisClient.get(token);
-  const jwtVerify = jwt.verify(token, 'secure key');
+  const [sessionUser, sessionUid] = Buffer.from(token, 'base64')
+    .toString().split(':');
 
-  if (parseInt(userId) !== jwtVerify.uid) {
+  if (userId !== sessionUid) {
     return res.status(401).send({
       'error': 'User unauthorized'
     })

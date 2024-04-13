@@ -1,4 +1,5 @@
 import Express from "express";
+import cookieParser from "cookie-parser";
 import authLogger from "./authLogger.js";
 import { isAuthInDevMode } from "./authUtils.js";
 import { InvalidParamsError } from "./errors.js";
@@ -8,6 +9,7 @@ import * as AuthRoutes from "./routes/AuthRoutes.js";
 
 const app = Express();
 app.use(Express.json());
+app.use(cookieParser('secret key'));
 const PORT = process.env.GALAXY_AUTH_PORT || 3001;
 
 // Routes

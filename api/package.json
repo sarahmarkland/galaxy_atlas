@@ -15,9 +15,9 @@
     "pg": "^8.11.5",
     "sequelize": "^6.37.2",
     "sqlite3": "^5.1.7",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "winston": "^3.13.0",
-    "swagger-jsdoc": "^6.2.8"
+    "winston": "^3.13.0"
   },
   "type": "module",
   "devDependencies": {
