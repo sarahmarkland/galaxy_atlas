@@ -93,7 +93,7 @@ async function bare_registerUser(req, res) {
  * 
  *       responses:
  *         "200":
- *           description: User successfully registered
+ *           description: User successfully registered and new header
  *         "401":
  *           description: incorrect username or password
  *         "500":
@@ -123,7 +123,7 @@ async function bare_loginUser(req, res) {
 
   res.cookie('X-Session-Token', token);
   redisClient.set(token, user.id, { EX: 60*60 });
-  return res.status(200).send({ token });
+  return res.status(200).send({ 'message': 'User authenticated' });
 }
 
 
@@ -137,20 +137,17 @@ async function bare_loginUser(req, res) {
  * @returns {unknown}
  */
 async function bare_logoutUser(req, res) {
-  const { token } = req.body;
-  if (!token) {
-    throw new InvalidParamsError("Field 'token' required");
-  }
+  const token = req.cookies['X-Session-Token'];
   const userId = await redisClient.get(token);
 
   if (!userId) {
     return res.status(404).send({
-      'error': 'no user session found'
+      'error': 'no user session'
     });
   }
 
   await redisClient.del(token);
-  return res.status(200).send({ 'message': 'User logged out', token });
+  return res.status(200).send({ 'message': 'User logged out' });
 }
 
 
@@ -164,13 +161,10 @@ async function bare_logoutUser(req, res) {
  * @returns {unknown}
  */
 async function bare_userAuthenticated(req, res) {
-  const { token } = req.body;
-  if (!token) {
-    throw new InvalidParamsError("Field 'token' required");
-  }
+  const token = req.cookies['X-Session-Token'];
   const userId = await redisClient.get(token);
-  const [sessionUser, sessionUid] = Buffer.from(token, 'base64')
-    .toString().split(':');
+  const sessionUid = Buffer.from(token, 'base64')
+    .toString().split(':')[1];
 
   if (userId !== sessionUid) {
     return res.status(401).send({
@@ -179,8 +173,7 @@ async function bare_userAuthenticated(req, res) {
   }
 
   return res.status(200).send({
-    'message': 'User is session authenticated',
-    token
+    'message': 'User is session authenticated'
   });
 }
 
