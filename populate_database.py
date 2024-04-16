@@ -13,10 +13,10 @@ conn = psycopg2.connect(
 # Create a cursor object using the connection
 cur = conn.cursor()
 
-systems = pd.read_csv('data/solar_systems.csv')
-planets = pd.read_csv('data/planets.csv')
-flora = pd.read_csv('data/flora.csv')
-fauna = pd.read_csv('data/fauna.csv')
+systems = pd.read_csv('api/data/solar_systems.csv')
+planets = pd.read_csv('api/data/planets.csv')
+flora = pd.read_csv('api/data/flora.csv')
+fauna = pd.read_csv('api/data/fauna.csv')
 
 # Convert integer columns to Python int type
 systems['system_id'] = systems['system_id'].astype(int)
