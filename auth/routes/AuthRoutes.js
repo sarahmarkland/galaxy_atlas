@@ -55,11 +55,9 @@ function getUserPassFields(authHeader) {
 async function bare_registerUser(req, res) {
   // Verify data is correct
   const [ username, password ] = getUserPassFields(req.headers.authorization);
-  console.log(username, password);
 
   // bcrypt and send to db
   const encryptedPass = await bcrypt.hash(password, 10);
-  console.log(username, password, encryptedPass);
   const newUser = await User.create({
     'username': username,
     'password': encryptedPass
@@ -155,7 +153,6 @@ async function bare_loginUser(req, res) {
  */
 async function bare_logoutUser(req, res) {
   const token = req.cookies['X-Session-Token'];
-  console.log(token);
   const userId = await redisClient.get(token);
 
   if (!userId) {

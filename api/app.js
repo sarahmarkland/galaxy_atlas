@@ -31,7 +31,6 @@ app.use('/logout', AuthRoutes.logout);
 
 // Error handling
 app.use((err, req, res, next) => {
-  console.log(err);
   logger.error(err);
 });
 
