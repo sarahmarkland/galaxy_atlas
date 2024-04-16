@@ -22,7 +22,7 @@ await MODELS.SolarSystems.bulkCreate(solarSystemCSV);
 
 // Add planets
 const cleanPlanetsCSV = planetsCSV.map((planet) => {
-  const cleanPlanet = Object.assign({}, planet);
+  const cleanPlanet = { ...planet };
   // Make csv object align with db model
   cleanPlanet.average_temp = planet.temp;
   cleanPlanet.distance_from_star = planet.distance;
@@ -36,7 +36,7 @@ await MODELS.Planets.bulkCreate(cleanPlanetsCSV);
 
 // Add flora
 const cleanFloraCSV = floraCSV.map((flora) => {
-  const cleanFlora = Object.assign({}, flora);
+  const cleanFlora = { ...flora };
   delete cleanFlora['planet'];
   delete cleanFlora['planet_id'];
   return cleanFlora;
@@ -45,14 +45,23 @@ await MODELS.Flora.bulkCreate(cleanFloraCSV);
 
 // Add fauna
 const cleanFaunaCSV = faunaCSV.map((fauna) => {
-  const cleanFauna = Object.assign({}, fauna);
+  const cleanFauna = { ...fauna };
   delete cleanFauna['planet'];
   delete cleanFauna['planet_id'];
   return cleanFauna;
 });
 await MODELS.Fauna.bulkCreate(cleanFaunaCSV);
 
+// Add SolarSystems_Planets junction
+const SSPJunction = planetsCSV.map((planet) => {
+  return {
+    'system_id': planet.system_id,
+    'planet_id': planet.planet_id
+  }
+});
+await MODELS.SolarSystems_Planets.bulkCreate(SSPJunction);
+
 // console.log(await MODELS.SolarSystems.findAll());
-console.log(await MODELS.Planets.findAll());
+console.log(await MODELS.SolarSystems_Planets.findAll());
 // console.log(await MODELS.Flora.findAll());
 // console.log(await MODELS.Fauna.findAll());
