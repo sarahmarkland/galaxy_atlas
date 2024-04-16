@@ -7,7 +7,7 @@ import authDb from '../authDb/index.js';
 * @openapi
 * /status:
 *   get:
-*     description: Gets the status of the database connection
+*     summary: Gets the status of the database connection
 *     responses:
 *       200:
 *         description: Database is connected
@@ -31,10 +31,10 @@ export async function getServerStatus(req, res) {
  * @openapi
  * /models:
  *   get:
- *     description: Gets the current models tracked by db
- *   responses:
- *     200:
- *       description: The current models tracked by db
+ *     summary: Gets the current models tracked by db
+ *     responses:
+ *       200:
+ *         description: The current models tracked by db
  */
 export async function getModels(req, res) {
   const models = authDb.getModels();

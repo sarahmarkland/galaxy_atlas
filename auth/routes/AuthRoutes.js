@@ -37,9 +37,9 @@ function getUserPassFields(authHeader) {
  * @openapi
  * paths:
  *   /register:
- *     description: authenticate user via auth header
  *     post:
- *       paramterers:
+ *       summary: Register new user
+ *       parameters:
  *         - in: header
  *           name: Authorization
  *           schema:
@@ -82,9 +82,9 @@ async function bare_registerUser(req, res) {
  * @returns {unknown}
  * @openapi
  * paths:
- *   /register:
+ *   /login:
  *     post:
- *       summary: log in user and get session token
+ *       summary: Log in user and get session token
  *       parameters:
  *         - in: header
  *           name: Authorization
@@ -139,14 +139,19 @@ async function bare_loginUser(req, res) {
  * paths:
  *   /logout:
  *     delete:
- *     description: Logout user and remove session token
- *     responses:
- *       "200":
- *         description: User successfully logged out
- *       "401":
- *         description: No user session found
- *       "500":
- *         description: Any other serverside error
+ *       summary: Logout user and remove session token
+ *       parameters:
+ *         - in: header
+ *           name: X-Session-Token
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User successfully logged out
+ *         "401":
+ *           description: No user session found
+ *         "500":
+ *           description: Any other serverside error
  */
 async function bare_logoutUser(req, res) {
   const token = req.cookies['X-Session-Token'];
@@ -173,15 +178,21 @@ async function bare_logoutUser(req, res) {
  * @returns {unknown}
  * @openapi
  * paths:
- *   get:
- *     description: Check if user is authenticated
- *     responses:
- *       "200":
- *         description: User is session authenticated
- *       "401":
- *         description: User is unauthorized
- *       "500":
- *         description: Any other serverside error
+ *   /authenticated:
+ *     get:
+ *       summary: Check if user is authenticated
+ *       parameters:
+ *         - in: header
+ *           name: X-Session-Token
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User is session authenticated
+ *         "401":
+ *           description: User is unauthorized
+ *         "500":
+ *           description: Any other serverside error
  */
 async function bare_userAuthenticated(req, res) {
   const token = req.cookies['X-Session-Token'];

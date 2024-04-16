@@ -1,6 +1,8 @@
 import Express from "express";
 import cookieParser from "cookie-parser";
+import swaggerUI from 'swagger-ui-express';
 import authLogger from "./authLogger.js";
+import authApiDoc from './authApiDoc.js';
 import { isAuthInDevMode } from "./authUtils.js";
 import { InvalidParamsError } from "./errors.js";
 import * as StatusRoutes from './routes/StatusRoutes.js';
@@ -13,6 +15,9 @@ app.use(cookieParser(process.env.GALAXY_AUTH_SECRET || 'secret key'));
 const PORT = process.env.GALAXY_AUTH_PORT || 3001;
 
 // Routes
+
+// Docs
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(authApiDoc));
 
 // Status
 app.use('/status', StatusRoutes.getServerStatus);
