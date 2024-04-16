@@ -25,7 +25,7 @@ function ifErrorCallNext(fn) {
 
 async function registerUser(req, res) {
   const authHeader = req.headers.authorization;
-  const registerReq = await fetch('http://localhost:3001/register', {
+  const registerRes = await fetch('http://localhost:3001/register', {
     method: 'POST',
     headers: {
       Authorization: authHeader,
@@ -33,14 +33,14 @@ async function registerUser(req, res) {
   });
 
   console.log(authHeader);
-  if (registerReq.status !== 200) {
-    if (registerReq.status === 409) {
-      return res.status(registerReq.status).send(await registerReq.json());
+  if (registerRes.status !== 200) {
+    if (registerRes.status === 409) {
+      return res.status(registerRes.status).send(await registerRes.json());
     }
-    logger.debug(registerReq.body);
-    return res.status(registerReq.status).send({
+    logger.debug(registerRes.body);
+    return res.status(registerRes.status).send({
       error: 'user could not be registered',
-      authError: await registerReq.json(),
+      authError: await registerRes.json(),
     });
   }
   return res.status(200).send({
@@ -50,29 +50,59 @@ async function registerUser(req, res) {
 
 async function logInUser(req, res) {
   const authHeader = req.headers.authorization;
-  const loginReq = await fetch('http://localhost:3001/login', {
+  const loginRes = await fetch('http://localhost:3001/login', {
     method: 'GET',
     headers: {
       Authorization: authHeader,
     },
   });
-  console.log(loginReq);
-  if (loginReq.status !== 200) {
-    if (loginReq.status === 401) {
-      return res.status(loginReq.status).send({
+  if (loginRes.status !== 200) {
+    if (loginRes.status === 401) {
+      return res.status(loginRes.status).send({
         error: 'cannot log in',
-        authError: await loginReq.json(),
+        authError: await loginRes.json(),
       });
     }
-    return res.status(loginReq.status).send({
+    logger.error(await loginRes.json());
+    return res.status(loginRes.status).send({
       error: 'User could not be logged in',
-      authError: await loginReq.json(),
+      authError: await loginRes.json(),
     });
   }
-  console.log(loginReq.headers.get('set-cookie'));
-  res.set('set-cookie', loginReq.headers.get('set-cookie'));
+  console.log(loginRes.headers.get('set-cookie'));
+  res.set('set-cookie', loginRes.headers.get('set-cookie'));
   return res.status(200).send({
-    'message': 'User logged in'
+    'TBI': 'Logged in message will go here'
+  });
+}
+
+async function logOutUser(req, res) {
+  const sessionToken = req.cookies['X-Session-Token'];
+  console.log(sessionToken);
+  const logoutRes = await fetch(
+    'http://localhost:3001/logout',
+    {
+      method: 'DELETE',
+      headers: {
+        'Cookie': `X-Session-Token=${sessionToken}`
+      }
+    }
+  );
+  
+  if (logoutRes.status !== 200) {
+    if (logoutRes.status === 401) {
+      return res.status(logoutRes.status).send({
+        'error': 'User not logged out',
+        'authMessage': await logoutRes.json()
+      });
+    }
+    logger.error(await logoutRes.json());
+    return res.status(logoutRes.status).send({
+      'error': 'User not logged out',
+    });
+  }
+  return res.status(200).send({
+    'TBI': 'Logged out message will go here'
   });
 }
 
@@ -110,5 +140,14 @@ async function bare_login(req, res) {
   });
 }
 
+async function bare_logout(req, res) {
+  if (req.method === 'DELETE') {
+    return await logOutUser(req, res);
+  }
+  // Send page
+  return req.status(200).send({ 'TBI': 'Page will go here'});
+}
+
 export const register = ifErrorCallNext(bare_register);
 export const login = ifErrorCallNext(bare_login);
+export const logout = ifErrorCallNext(bare_logout);
