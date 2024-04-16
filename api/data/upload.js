@@ -28,7 +28,7 @@ const cleanPlanetsCSV = planetsCSV.map((planet) => {
   cleanPlanet.distance_from_star = planet.distance;
   delete cleanPlanet['system'];
   delete cleanPlanet['system_id'];
-  delete cleanPlanet['average_temp'];
+  delete cleanPlanet['temp'];
   delete cleanPlanet['distance'];
   return cleanPlanet;
 });
@@ -53,7 +53,6 @@ const cleanFaunaCSV = faunaCSV.map((fauna) => {
 await MODELS.Fauna.bulkCreate(cleanFaunaCSV);
 
 // console.log(await MODELS.SolarSystems.findAll());
-// console.log(await MODELS.Planets.findAll());
+console.log(await MODELS.Planets.findAll());
 // console.log(await MODELS.Flora.findAll());
-console.log(await MODELS.Fauna.findAll());
-// console.log(floraCSV, cleanFloraCSV);
+// console.log(await MODELS.Fauna.findAll());
