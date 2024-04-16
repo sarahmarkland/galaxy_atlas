@@ -53,13 +53,22 @@ const cleanFaunaCSV = faunaCSV.map((fauna) => {
 await MODELS.Fauna.bulkCreate(cleanFaunaCSV);
 
 // Add SolarSystems_Planets junction
-const SSPJunction = planetsCSV.map((planet) => {
+const junction_SolarSystems_Planets = planetsCSV.map((planet) => {
   return {
     'system_id': planet.system_id,
     'planet_id': planet.planet_id
   }
 });
-await MODELS.SolarSystems_Planets.bulkCreate(SSPJunction);
+await MODELS.SolarSystems_Planets.bulkCreate(junction_SolarSystems_Planets);
+
+// Add Planets_Flora junction
+const junction_Planets_Flora = floraCSV.map((flora) => {
+  return {
+    'planet_id': flora.planet_id,
+    'flora_id': flora.flora_id
+  }
+});
+await MODELS.Planets_Flora.bulkCreate(junction_Planets_Flora);
 
 // console.log(await MODELS.SolarSystems.findAll());
 console.log(await MODELS.SolarSystems_Planets.findAll());
