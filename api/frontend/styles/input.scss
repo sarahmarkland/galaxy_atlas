@@ -39,6 +39,19 @@
     text-align: center;
   }
 
+  a {
+    color: yellow;
+  }
+  a:hover {
+    color: orange;
+  }
+  a:visited {
+    color: yellow;
+  }
+  a:visited:hover {
+    color: orange;
+  }
+
   p {
     font-size: .6em;
     font-weight: 400;
