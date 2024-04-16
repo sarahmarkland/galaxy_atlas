@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
       'error': 'Create a unique username',
     });
   }
-  authLogger.error(err);
+  authLogger.error(err.message);
   if (isAuthInDevMode()) {
     return res.status(500).send({
       'error': err.message, 'jsMessage': `${err}`

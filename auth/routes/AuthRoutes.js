@@ -155,6 +155,7 @@ async function bare_loginUser(req, res) {
  */
 async function bare_logoutUser(req, res) {
   const token = req.cookies['X-Session-Token'];
+  console.log(token);
   const userId = await redisClient.get(token);
 
   if (!userId) {
