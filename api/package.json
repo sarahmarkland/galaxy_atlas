@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec GALAXY_DEV=true node app.js",
+    "dev_upload": "GALAXY_DEV=true node data/upload.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
