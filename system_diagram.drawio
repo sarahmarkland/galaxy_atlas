@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2024-04-12T16:13:55.197Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="Usq-uFOxLPW3pRqwjn-e" version="24.2.2" type="device">
+<mxfile host="app.diagrams.net" modified="2024-04-13T02:26:29.047Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="unvsvjMXQAq0fwNpFRSI" version="24.2.2" type="device">
   <diagram name="Page-1" id="-mHw6giU4msM1elWIZ3y">
     <mxGraphModel dx="410" dy="830" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="w-C8GHnoNehhJUKiD736-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-2" target="w-C8GHnoNehhJUKiD736-4">
+        <mxCell id="w-C8GHnoNehhJUKiD736-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" source="w-C8GHnoNehhJUKiD736-2" target="w-C8GHnoNehhJUKiD736-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-2" target="w-C8GHnoNehhJUKiD736-13">
+        <mxCell id="w-C8GHnoNehhJUKiD736-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" source="w-C8GHnoNehhJUKiD736-2" target="w-C8GHnoNehhJUKiD736-13" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="260" y="430" />
@@ -15,64 +15,50 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-2" value="&lt;div&gt;Auth&lt;/div&gt;&lt;div&gt;Node Express Sequelize Redis&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;All POST&lt;br&gt;&lt;/div&gt;&lt;div&gt;/register /login /logout /authenticate&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="260" width="120" height="110" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-2" value="&lt;div&gt;Auth&lt;/div&gt;&lt;div&gt;Node Express Sequelize Redis&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;POST /register&lt;/div&gt;&lt;div&gt;GET /login /authenticate&lt;/div&gt;&lt;div&gt;DELETE /logout &lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="260" width="150" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-3" target="w-C8GHnoNehhJUKiD736-2">
+        <mxCell id="w-C8GHnoNehhJUKiD736-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" source="w-C8GHnoNehhJUKiD736-3" target="w-C8GHnoNehhJUKiD736-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-3" value="UserDB&lt;div&gt;Postgres&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="w-C8GHnoNehhJUKiD736-3" value="UserDB&lt;div&gt;Postgres&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="240" width="80" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-4" value="&lt;div&gt;SessionDB&lt;/div&gt;&lt;div&gt;Redis&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="w-C8GHnoNehhJUKiD736-4" value="&lt;div&gt;SessionDB&lt;/div&gt;&lt;div&gt;Redis&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="350" width="80" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-13" value="&lt;div&gt;Public&lt;/div&gt;&lt;div&gt;Node Express Handlebars&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;GET &amp;lt;content-pages&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;GET|POST /login, /logout, /register&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="350" y="460" width="120" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-15" value="&lt;div&gt;Authorization: Basic &amp;lt;base64&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;{ &quot;token&quot;:&amp;nbsp; token }&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="150" y="440" width="170" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-16" target="w-C8GHnoNehhJUKiD736-17">
+        <mxCell id="JePsSGBnw0IzqoXGmrI3-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-13" target="w-C8GHnoNehhJUKiD736-17">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-16" target="w-C8GHnoNehhJUKiD736-13">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="600" y="430" />
-              <mxPoint x="410" y="430" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="w-C8GHnoNehhJUKiD736-13" value="&lt;div&gt;Public API&lt;br&gt;&lt;/div&gt;&lt;div&gt;Node Express Sequelize&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;GET &amp;lt;content-pages&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;GET|POST /login&lt;/div&gt;&lt;div&gt;GET|DELETE/logout,&lt;/div&gt;&lt;div&gt;GET|POST /register&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="460" width="120" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-16" value="&lt;div&gt;API&lt;/div&gt;&lt;div&gt;Node Express Sequelize&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="540" y="277.5" width="120" height="75" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-15" value="&lt;div&gt;Authorization: Basic &amp;lt;base64&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;X-Session-Token: &amp;lt;token&amp;gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="150" y="440" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-17" value="&lt;div&gt;GalaxyDB&lt;/div&gt;&lt;div&gt;Postgres&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="750" y="290" width="80" height="50" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-17" value="&lt;div&gt;GalaxyDB&lt;/div&gt;&lt;div&gt;Postgres&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="620" y="505" width="80" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-24" value="{ &quot;token&quot;:&amp;nbsp; token }" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="570" y="450" width="110" height="30" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-24" value="galaxy data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="490" y="450" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-25" value="Client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="w-C8GHnoNehhJUKiD736-25" value="Client" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="350" y="670" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-26" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="w-C8GHnoNehhJUKiD736-25" target="w-C8GHnoNehhJUKiD736-13">
+        <mxCell id="w-C8GHnoNehhJUKiD736-26" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="w-C8GHnoNehhJUKiD736-25" target="w-C8GHnoNehhJUKiD736-13" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="310" y="690" as="sourcePoint" />
             <mxPoint x="360" y="640" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-29" value="&lt;div&gt;Authorization: Basic &amp;lt;base64&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Authorization: Bearer &amp;lt;token&amp;gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="220" y="580" width="170" height="50" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-29" value="&lt;div&gt;Authorization: Basic &amp;lt;base64&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;X-Session-Token: &amp;lt;token&amp;gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="160" y="570" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-31" value="token: uid" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="140" y="380" width="60" height="20" as="geometry" />
+        <mxCell id="w-C8GHnoNehhJUKiD736-31" value="token: uid" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="130" y="390" width="60" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-32" value="&lt;div&gt;username&lt;/div&gt;&lt;div&gt;password&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;" vertex="1" parent="1">
+        <mxCell id="w-C8GHnoNehhJUKiD736-32" value="&lt;div&gt;username&lt;/div&gt;&lt;div&gt;password&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;" parent="1" vertex="1">
           <mxGeometry x="130" y="240" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="w-C8GHnoNehhJUKiD736-34" value="galaxy data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;" vertex="1" parent="1">
-          <mxGeometry x="680" y="277.5" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

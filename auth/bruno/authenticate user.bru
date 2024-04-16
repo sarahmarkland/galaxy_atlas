@@ -4,14 +4,12 @@ meta {
   seq: 4
 }
 
-post {
+get {
   url: http://localhost:3001/authenticated
-  body: json
+  body: none
   auth: none
 }
 
-body:json {
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTcxMjkzOTk4MiwiZXhwIjoxNzEyOTQzNTgyfQ.SpeOVbFyzNKfg3xV7Innldcx96V-8HEr0Vt4rFjPyTQ"
-  }
+headers {
+  Cookie: YnVuZ3Vsb2o6MTrvv73vv73vv73vv70JSULvv73vv73vv70J77%2B977%2B9Le%2B%2FvVw%3D
 }

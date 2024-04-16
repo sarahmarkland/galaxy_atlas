@@ -4,14 +4,12 @@ meta {
   seq: 3
 }
 
-post {
+delete {
   url: http://localhost:3001/logout
-  body: json
+  body: none
   auth: none
 }
 
-body:json {
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTcxMjkzNzU3MSwiZXhwIjoxNzEyOTQxMTcxfQ.nR3_d71YSsodeFtTEaRuj1ql56a1AkDMPZ7OQhm_7xI"
-  }
+headers {
+  Cookie: YnVuZ3Vsb2o6MTrvv73vv73vv73vv70JSULvv73vv73vv70J77%2B977%2B9Le%2B%2FvVw%3D
 }

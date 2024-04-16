@@ -1,5 +1,8 @@
 import Express from "express";
+import cookieParser from "cookie-parser";
+import swaggerUI from 'swagger-ui-express';
 import authLogger from "./authLogger.js";
+import authApiDoc from './authApiDoc.js';
 import { isAuthInDevMode } from "./authUtils.js";
 import { InvalidParamsError } from "./errors.js";
 import * as StatusRoutes from './routes/StatusRoutes.js';
@@ -8,9 +11,13 @@ import * as AuthRoutes from "./routes/AuthRoutes.js";
 
 const app = Express();
 app.use(Express.json());
+app.use(cookieParser(process.env.GALAXY_AUTH_SECRET || 'secret key'));
 const PORT = process.env.GALAXY_AUTH_PORT || 3001;
 
 // Routes
+
+// Docs
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(authApiDoc));
 
 // Status
 app.use('/status', StatusRoutes.getServerStatus);
@@ -18,22 +25,24 @@ app.use('/models', StatusRoutes.getModels);
 
 // Auth
 app.post('/register', AuthRoutes.registerUser);
-app.post('/login', AuthRoutes.loginUser);
-app.post('/logout', AuthRoutes.logoutUser);
-app.post('/authenticated', AuthRoutes.userAuthenticated);
+app.get('/login', AuthRoutes.loginUser);
+app.delete('/logout', AuthRoutes.logoutUser);
+app.get('/authenticated', AuthRoutes.userAuthenticated);
 
 // Error-handling
 app.use((err, req, res, next) => {
   if (err instanceof InvalidParamsError) {
-    res.status(400).send({
-      'error': 'Object cannot be parsed', 'jsMessage': `${err.message}`
+    return res.status(400).send({
+      'error': 'Request cannot be parsed', 'message': `${err.message}`
     });
   } else {
     authLogger.error(err);
     if (isAuthInDevMode()) {
-      res.status(500).send({ 'error': err.message, 'jsMessage': `${err}` });
+      return res.status(500).send({
+        'error': err.message, 'jsMessage': `${err}`
+      });
     } else {
-      res.status(500).send ({ 'error': 'serverside error' });
+      return res.status(500).send ({ 'error': 'serverside error' });
     }
   }
 });

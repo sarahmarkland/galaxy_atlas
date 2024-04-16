@@ -1,7 +1,7 @@
 import authLogger from "../authLogger.js";
 import User from "../authDb/models/Users.js";
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { randomBytes } from 'node:crypto';
 import redisClient from "../redisClient.js";
 import { ifErrorCallNext } from "../authUtils.js";
 import { InvalidParamsError } from "../errors.js";
@@ -37,9 +37,9 @@ function getUserPassFields(authHeader) {
  * @openapi
  * paths:
  *   /register:
- *     description: authenticate user via auth header
  *     post:
- *       paramterers:
+ *       summary: Register new user
+ *       parameters:
  *         - in: header
  *           name: Authorization
  *           schema:
@@ -82,9 +82,9 @@ async function bare_registerUser(req, res) {
  * @returns {unknown}
  * @openapi
  * paths:
- *   /register:
+ *   /login:
  *     post:
- *       summary: log in user and get session token
+ *       summary: Log in user and get session token
  *       parameters:
  *         - in: header
  *           name: Authorization
@@ -93,7 +93,7 @@ async function bare_registerUser(req, res) {
  * 
  *       responses:
  *         "200":
- *           description: User successfully registered
+ *           description: User successfully registered and new header
  *         "401":
  *           description: incorrect username or password
  *         "500":
@@ -117,14 +117,13 @@ async function bare_loginUser(req, res) {
     });
   }
 
-  const token = jwt.sign(
-    { uid: user.id },
-    'secure key',  // TODO: add environment variable for secure key
-    { expiresIn: '1h' }
-  );
+  const token = Buffer.from(
+    `${user.username}:${user.id}:${randomBytes(16).toString()}`
+    ).toString('base64');
 
+  res.cookie('X-Session-Token', token);
   redisClient.set(token, user.id, { EX: 60*60 });
-  return res.status(200).send({ token });
+  return res.status(200).send({ 'message': 'User authenticated' });
 }
 
 
@@ -136,22 +135,36 @@ async function bare_loginUser(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /logout:
+ *     delete:
+ *       summary: Logout user and remove session token
+ *       parameters:
+ *         - in: header
+ *           name: X-Session-Token
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User successfully logged out
+ *         "401":
+ *           description: No user session found
+ *         "500":
+ *           description: Any other serverside error
  */
 async function bare_logoutUser(req, res) {
-  const { token } = req.body;
-  if (!token) {
-    throw new InvalidParamsError("Field 'token' required");
-  }
+  const token = req.cookies['X-Session-Token'];
   const userId = await redisClient.get(token);
 
   if (!userId) {
-    return res.status(404).send({
-      'error': 'no user session found'
+    return res.status(401).send({
+      'error': 'no user session'
     });
   }
 
   await redisClient.del(token);
-  return res.status(200).send({ 'message': 'User logged out', token });
+  return res.status(200).send({ 'message': 'User logged out' });
 }
 
 
@@ -163,24 +176,38 @@ async function bare_logoutUser(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /authenticated:
+ *     get:
+ *       summary: Check if user is authenticated
+ *       parameters:
+ *         - in: header
+ *           name: X-Session-Token
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User is session authenticated
+ *         "401":
+ *           description: User is unauthorized
+ *         "500":
+ *           description: Any other serverside error
  */
 async function bare_userAuthenticated(req, res) {
-  const { token } = req.body;
-  if (!token) {
-    throw new InvalidParamsError("Field 'token' required");
-  }
+  const token = req.cookies['X-Session-Token'];
   const userId = await redisClient.get(token);
-  const jwtVerify = jwt.verify(token, 'secure key');
+  const sessionUid = Buffer.from(token, 'base64')
+    .toString().split(':')[1];
 
-  if (parseInt(userId) !== jwtVerify.uid) {
+  if (userId !== sessionUid) {
     return res.status(401).send({
       'error': 'User unauthorized'
     })
   }
 
   return res.status(200).send({
-    'message': 'User is session authenticated',
-    token
+    'message': 'User is session authenticated'
   });
 }
 
