@@ -1,5 +1,6 @@
 import Express from 'express';
 import StatusRoutes from './routes/StatusRoutes.js';
+import * as AuthRoutes from './routes/AuthRoutes.js';
 import swaggerUI from 'swagger-ui-express';
 import apiDoc from './apiDoc.js';
 import logger from './logger.js';
@@ -19,6 +20,15 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 // Status
 app.get('/status', StatusRoutes.getServerStatus);
 app.get('/models', StatusRoutes.getModels);
+
+// Auth
+app.use('/register', AuthRoutes.register);
+
+
+// Error handling
+app.use((err, req, res, next) => {
+  logger.error(err);
+});
 
 app.listen(PORT, (error) =>{
   if(!error)

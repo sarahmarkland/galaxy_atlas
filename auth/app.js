@@ -7,6 +7,7 @@ import { isAuthInDevMode } from "./authUtils.js";
 import { InvalidParamsError } from "./errors.js";
 import * as StatusRoutes from './routes/StatusRoutes.js';
 import * as AuthRoutes from "./routes/AuthRoutes.js";
+import { UniqueConstraintError } from 'sequelize';
 
 
 const app = Express();
@@ -35,15 +36,19 @@ app.use((err, req, res, next) => {
     return res.status(400).send({
       'error': 'Request cannot be parsed', 'message': `${err.message}`
     });
+  }
+  if (err instanceof UniqueConstraintError) {
+    return res.status(409).send({
+      'error': 'Create a unique username',
+    });
+  }
+  authLogger.error(err);
+  if (isAuthInDevMode()) {
+    return res.status(500).send({
+      'error': err.message, 'jsMessage': `${err}`
+    });
   } else {
-    authLogger.error(err);
-    if (isAuthInDevMode()) {
-      return res.status(500).send({
-        'error': err.message, 'jsMessage': `${err}`
-      });
-    } else {
-      return res.status(500).send ({ 'error': 'serverside error' });
-    }
+    return res.status(500).send ({ 'error': 'serverside error' });
   }
 });
 
