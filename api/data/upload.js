@@ -70,7 +70,28 @@ const junction_Planets_Flora = floraCSV.map((flora) => {
 });
 await MODELS.Planets_Flora.bulkCreate(junction_Planets_Flora);
 
-// console.log(await MODELS.SolarSystems.findAll());
-console.log(await MODELS.SolarSystems_Planets.findAll());
-// console.log(await MODELS.Flora.findAll());
-// console.log(await MODELS.Fauna.findAll());
+const junction_Planets_Fauna = faunaCSV.map((fauna) => {
+  return {
+    'planet_id': fauna.planet_id,
+    'fauna_id': fauna.fauna_id
+  }
+});
+await MODELS.Planets_Fauna.bulkCreate(junction_Planets_Fauna);
+
+const dataCheck = {
+  'SolarSystems': await MODELS.SolarSystems.findAll(),
+  'Planets': await MODELS.Planets.findAll(),
+  'Flora': await MODELS.Flora.findAll(),
+  'Fauna': await MODELS.Flora.findAll(),
+  'SolarSystems_Planets': await MODELS.SolarSystems_Planets.findAll(),
+  'Planets_Flora': await MODELS.Planets_Flora.findAll(),
+  'Planets_Fauna': await MODELS.Planets_Fauna.findAll(),
+}
+
+let totalAdded = 0;
+for (const d in dataCheck) {
+  console.log(`Added ${dataCheck[d].length} ${d}.`);
+  totalAdded += dataCheck[d].length;
+}
+console.log(`Added ${totalAdded} records in total.`);
+await db.close();

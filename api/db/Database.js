@@ -66,6 +66,15 @@ class Database {
     return Object.keys(this.dbConn.models);
   }
 
+  /**
+   * Close the database connection
+   *
+   * @returns {*}
+   */
+  close() {
+    return this.dbConn.close();
+  }
+
 }
 
 export default Database;
