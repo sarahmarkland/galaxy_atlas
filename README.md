@@ -8,6 +8,12 @@ System Diagram
 API DB
 ![UML diagram](Galactic_Atlas_v6.png)
 
+Register Login Flow
+![Register Login Flow Diagram](auth_diagram_0_register_login.jpg)
+
+Authenticated Logout Flow
+![Authenticated Logout Flow Diagram](auth_diagram_1_authenticated_logout.jpg)
+
 ## Features
 
 - **Galaxy Data**: Access detailed information about various galaxies including their names, types, distances, and more.
