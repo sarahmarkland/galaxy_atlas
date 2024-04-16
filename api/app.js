@@ -23,6 +23,8 @@ app.get('/models', StatusRoutes.getModels);
 
 // Auth
 app.use('/register', AuthRoutes.register);
+app.use('/login', AuthRoutes.login);
+// app.use('/logout', AuthRoutes.logout);
 
 
 // Error handling
