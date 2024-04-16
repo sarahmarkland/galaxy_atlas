@@ -32,7 +32,6 @@ async function registerUser(req, res) {
     },
   });
 
-  console.log(authHeader);
   if (registerRes.status !== 200) {
     if (registerRes.status === 409) {
       return res.status(registerRes.status).send(await registerRes.json());
@@ -69,7 +68,6 @@ async function logInUser(req, res) {
       authError: await loginRes.json(),
     });
   }
-  console.log(loginRes.headers.get('set-cookie'));
   res.set('set-cookie', loginRes.headers.get('set-cookie'));
   return res.status(200).send({
     'TBI': 'Logged in message will go here'
@@ -78,7 +76,6 @@ async function logInUser(req, res) {
 
 async function logOutUser(req, res) {
   const sessionToken = req.cookies['X-Session-Token'];
-  console.log(sessionToken);
   const logoutRes = await fetch(
     'http://localhost:3001/logout',
     {
