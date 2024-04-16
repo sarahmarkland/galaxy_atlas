@@ -135,6 +135,18 @@ async function bare_loginUser(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /logout:
+ *     delete:
+ *     description: Logout user and remove session token
+ *     responses:
+ *       "200":
+ *         description: User successfully logged out
+ *       "401":
+ *         description: No user session found
+ *       "500":
+ *         description: Any other serverside error
  */
 async function bare_logoutUser(req, res) {
   const token = req.cookies['X-Session-Token'];
@@ -159,6 +171,17 @@ async function bare_logoutUser(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {unknown}
+ * @openapi
+ * paths:
+ *   get:
+ *     description: Check if user is authenticated
+ *     responses:
+ *       "200":
+ *         description: User is session authenticated
+ *       "401":
+ *         description: User is unauthorized
+ *       "500":
+ *         description: Any other serverside error
  */
 async function bare_userAuthenticated(req, res) {
   const token = req.cookies['X-Session-Token'];
