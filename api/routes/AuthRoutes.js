@@ -138,7 +138,7 @@ async function bare_register(req, res) {
     return await registerUser(req, res);
   }
   // Send page
-  return req.status(200).send({ TBI: 'Page will go here' });
+  return res.status(200).send({ TBI: 'Page will go here' });
 }
 
 /**
@@ -217,7 +217,7 @@ async function bare_logout(req, res) {
     return await logOutUser(req, res);
   }
   // Send page
-  return req.status(200).send({ 'TBI': 'Page will go here'});
+  return res.status(200).send({ 'TBI': 'Page will go here'});
 }
 
 export const register = ifErrorCallNext(bare_register);
