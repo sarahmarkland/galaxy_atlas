@@ -3,16 +3,16 @@
 Welcome to the Atlas of Galaxies API! This API provides comprehensive data and visualization tools for exploring galaxies in the universe.
 
 System Diagram
-![System diagram](./system_diagram.jpg)
+![System diagram](Design_Documents/system_diagram.jpg)
 
 API DB
-![UML diagram](Galactic_Atlas_v6.png)
+![UML diagram](Design_Documents/Galactic_Atlas_v6.png)
 
 Register Login Flow
-![Register Login Flow Diagram](auth_diagram_0_register_login.jpg)
+![Register Login Flow Diagram](Design_Documents/auth_diagram_0_register_login.jpg)
 
 Authenticated Logout Flow
-![Authenticated Logout Flow Diagram](auth_diagram_1_authenticated_logout.jpg)
+![Authenticated Logout Flow Diagram](Design_Documents/auth_diagram_1_authenticated_logout.jpg)
 
 ## Features
 

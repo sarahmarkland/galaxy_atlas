@@ -1,0 +1,20 @@
+--- To query for all planets of a solar system ---
+SELECT p.*
+FROM planets p
+JOIN solarsystems_planets sp ON p.planet_id = sp.planet_id
+JOIN solarsystems s ON sp.system_id = s.system_id
+WHERE s.name = 'Tocus Chime';
+
+--- To query for all fauna on a planet ---
+SELECT f.*
+FROM fauna f
+JOIN planets_fauna pf ON f.fauna_id = pf.fauna_id
+JOIN planets p ON pf.planet_id = p.planet_id
+WHERE p.name = 'Chalupax';
+
+--- To query for all flora on a planet ---
+SELECT f.*
+FROM flora f
+JOIN planets_flora pf ON f.flora_id = pf.flora_id
+JOIN planets p ON pf.planet_id = p.planet_id
+WHERE p.name = 'Chalupax';

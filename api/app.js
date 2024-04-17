@@ -5,6 +5,7 @@ import StatusRoutes from './routes/StatusRoutes.js';
 import * as AuthRoutes from './routes/AuthRoutes.js';
 import apiDoc from './apiDoc.js';
 import logger from './logger.js';
+import * as MODELS from './db/models/index.js'
 import fs from 'fs';
 
 const app = Express();
@@ -16,6 +17,15 @@ const PORT = 3000;
 app.get('/', (req, res) => {
   res.sendFile(process.cwd() + '/frontend/index.html')
 });
+
+app.get('/planets', (req, res) => {
+  //var = sql command
+
+  //turn it into html
+
+  //serve it to the page
+});
+
 // Docs
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
