@@ -17,13 +17,13 @@
 				<input type="text" placeholder="name"/>
 				<input type="password" placeholder="password"/>
 				<input type="text" placeholder="email address"/>
-				<button>create</button>
+				<button id="register-submit">create</button>
 				<p class="message">Already registered? <a href="#">Sign In</a></p>
 			</form>
 			<form class="login-form">
 				<input type="text" placeholder="username"/>
 				<input type="password" placeholder="password"/>
-				<button>login</button>
+				<button id="login-submit">login</button>
 				<p class="message">Not registered? <a href="#">Create an account</a></p>
 			</form>
 			</div>
@@ -31,8 +31,34 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			$('.message a').click(function() {
+			$('.message a').click(function(e) {
+				e.stopImmediatePropagation();
+				e.preventDefault();
 				$('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+			});
+
+			// Handle register
+			$('button#register-submit')
+
+			// Handle login
+			$('button#login-submit').on('click', (e) => {
+				e.stopImmediatePropagation();
+				e.preventDefault();
+				const username = $('form.login-form [placeholder="username"]').val();
+				const password = $('form.login-form [placeholder="password"]').val();
+				console.log(username, password);
+				fetch(
+					'http://localhost:3000/login',
+					{
+						method: 'POST',
+						headers: {
+							Authorization: `Basic ${btoa(`${username}:${password}`)}`
+						}
+					}
+				).then((res) => {
+					console.log(loginRes);
+				});
+				return false;
 			});
 		});
 	</script>

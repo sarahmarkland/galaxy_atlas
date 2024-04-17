@@ -6,10 +6,12 @@ import * as AuthRoutes from './routes/AuthRoutes.js';
 import apiDoc from './apiDoc.js';
 import logger from './logger.js';
 import * as MODELS from './db/models/index.js'
+import cors from 'cors';
 import fs from 'fs';
 
 const app = Express();
 app.use(Express.static('./frontend/'));
+app.use(cors());
 app.use(cookieParser());
 const PORT = 3000;
 
