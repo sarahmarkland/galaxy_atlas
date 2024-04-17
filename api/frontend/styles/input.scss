@@ -52,6 +52,12 @@
     color: orange;
   }
 
+  .thick-hr {
+    height: 4px;
+    background-color: yellow;
+    border: none;
+  }
+
   p {
     font-size: .6em;
     font-weight: 400;
@@ -68,12 +74,13 @@
   }
 
   #background-static {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    height: 100vh;
     width: 100%;
     height: 100%;
-    background: url(../images/galaxy2.jpg) no-repeat center center fixed;
+    background: url(../images/galaxy2.jpg) center center fixed;
     background-size: cover;
     z-index: -1;
   }
