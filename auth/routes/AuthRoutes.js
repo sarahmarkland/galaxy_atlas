@@ -91,7 +91,7 @@ async function bare_registerUser(req, res) {
  * 
  *       responses:
  *         "200":
- *           description: User successfully registered and new header
+ *           description: User successfully logged in and new session token
  *         "401":
  *           description: incorrect username or password
  *         "500":
