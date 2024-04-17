@@ -110,6 +110,28 @@ async function logOutUser(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {*}
+ * @openapi
+ * paths:
+ *   /register:
+ *     post:
+ *       summary: Register new user
+ *       parameters:
+ *         - in: header
+ *           name: Authorization
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User successfully registered
+ *         "400":
+ *           description: sequelize cannot work with provided object
+ *         "500":
+ *           description: any other serverside error
+ *     get:
+ *       summary: Register page
+ *       responses:
+ *         "200":
+ *           description: Register page
  */
 async function bare_register(req, res) {
   if (req.method === 'POST') {
@@ -126,6 +148,29 @@ async function bare_register(req, res) {
  * @param {*} req
  * @param {*} res
  * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /login:
+ *     post:
+ *       summary: Log in user and get session token
+ *       parameters:
+ *         - in: header
+ *           name: Authorization
+ *           schema:
+ *             type: string
+ * 
+ *       responses:
+ *         "200":
+ *           description: User successfully logged in and new session token
+ *         "401":
+ *           description: incorrect username or password
+ *         "500":
+ *           description: any other serverside error
+ *     get:
+ *       summary: Login page
+ *       responses:
+ *         "200":
+ *           description: Login page
  */
 async function bare_login(req, res) {
   if (req.method === 'POST') {
@@ -137,6 +182,36 @@ async function bare_login(req, res) {
   });
 }
 
+/**
+ * Log out
+ *
+ * @async
+ * @param {*} req
+ * @param {*} res
+ * @returns {unknown}
+ * @openapi
+ * paths:
+ *   /logout:
+ *     delete:
+ *       summary: Logout user and remove session token
+ *       parameters:
+ *         - in: header
+ *           name: X-Session-Token
+ *           schema:
+ *             type: string
+ *       responses:
+ *         "200":
+ *           description: User successfully logged out
+ *         "401":
+ *           description: No user session found
+ *         "500":
+ *           description: Any other serverside error
+ *     get:
+ *       summary: Logout page
+ *       responses:
+ *         "200":
+ *           description: Logout page
+ */
 async function bare_logout(req, res) {
   if (req.method === 'DELETE') {
     return await logOutUser(req, res);
